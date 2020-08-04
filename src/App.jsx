@@ -1,9 +1,9 @@
 import React from 'react';
 
+import VotePage from './VotePage';
+
 export default function App() {
   return (
-    <div>
-      <p>Hello, world!</p>
-    </div>
+    <VotePage />
   );
 }
