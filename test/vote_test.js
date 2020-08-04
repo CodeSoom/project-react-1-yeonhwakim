@@ -5,7 +5,7 @@ const restaurants = [
   { id: 'no2', name: '요기맘' },
   { id: 'no3', name: '구내식당' },
   { id: 'no4', name: '돈푸대' },
-  { id: 'no5', name: '태양식 당' },
+  { id: 'no5', name: '태양식당' },
 ];
 
 Scenario('투표리스트가 보인다.', (I) => {

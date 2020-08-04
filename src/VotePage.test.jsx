@@ -2,19 +2,19 @@ import React from 'react';
 
 import { render } from '@testing-library/react';
 
-import App from './App';
+import VotePage from './VotePage';
 
-describe('App', () => {
+describe('VotePage', () => {
   it('redners vote header', () => {
     const { container } = render((
-      <App />
+      <VotePage />
     ));
     expect(container).toHaveTextContent('Vote for lunch!!!');
   });
 
   it('redners restaurants list', () => {
     const { container } = render((
-      <App />
+      <VotePage />
     ));
     expect(container).toHaveTextContent('국수나무');
     expect(container).toHaveTextContent('요기맘');
