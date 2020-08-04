@@ -4,11 +4,9 @@ import { render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import App from './App';
+import VotePage from './VotePage';
 
-jest.mock('react-redux');
-
-describe('App', () => {
+describe('VotePage', () => {
   const dispatch = jest.fn();
 
   beforeEach(() => {
@@ -23,14 +21,14 @@ describe('App', () => {
 
   it('redners vote header', () => {
     const { container } = render((
-      <App />
+      <VotePage />
     ));
     expect(container).toHaveTextContent('Vote for lunch!!!');
   });
 
   it('loads restaurants list', () => {
     render((
-      <App />
+      <VotePage />
     ));
     expect(dispatch).toBeCalled();
   });
