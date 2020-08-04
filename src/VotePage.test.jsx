@@ -2,9 +2,23 @@ import React from 'react';
 
 import { render } from '@testing-library/react';
 
+import { useDispatch, useSelector } from 'react-redux';
+
 import VotePage from './VotePage';
 
 describe('VotePage', () => {
+  const dispatch = jest.fn();
+
+  beforeEach(() => {
+    dispatch.mockClear();
+
+    useDispatch.mockImplementation(() => dispatch);
+
+    useSelector.mockImplementation((selector) => selector({
+      restaurants: [],
+    }));
+  });
+
   it('redners vote header', () => {
     const { container } = render((
       <VotePage />
@@ -12,14 +26,10 @@ describe('VotePage', () => {
     expect(container).toHaveTextContent('Vote for lunch!!!');
   });
 
-  it('redners restaurants list', () => {
-    const { container } = render((
+  it('loads restaurants list', () => {
+    render((
       <VotePage />
     ));
-    expect(container).toHaveTextContent('국수나무');
-    expect(container).toHaveTextContent('요기맘');
-    expect(container).toHaveTextContent('구내식당');
-    expect(container).toHaveTextContent('돈푸대');
-    expect(container).toHaveTextContent('태양식당');
+    expect(dispatch).toBeCalled();
   });
 });
