@@ -1,14 +1,11 @@
 import React from 'react';
 
-export default function VoteItem({ restaurantItem: { name, count } }) {
+export default function VoteItem({ restaurantItem: { name, count, id }, onClick }) {
   return (
     <>
       <li>
-        <span>
+        <button type="button" onClick={() => onClick(id)}>
           {name}
-        </span>
-        ||
-        <button type="button">
           {count}
         </button>
       </li>
