@@ -1,6 +1,9 @@
 import reducer, {
   setRestaurants,
+  setVoteCount,
 } from './slice';
+
+import RESTAURANTS from '../../fixtures/restaurants';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
@@ -21,17 +24,20 @@ describe('reducer', () => {
         restaurants: [],
       };
 
-      const restaurants = [
-        { id: 'no1', name: '국수나무', count: 0 },
-        { id: 'no2', name: '요기맘', count: 0 },
-        { id: 'no3', name: '구내식당', count: 0 },
-        { id: 'no4', name: '돈푸대', count: 0 },
-        { id: 'no5', name: '태양식당', count: 0 },
-      ];
-
-      const state = reducer(initialState, setRestaurants(restaurants));
+      const state = reducer(initialState, setRestaurants(RESTAURANTS));
 
       expect(state.restaurants).toHaveLength(5);
+    });
+  });
+
+  describe('setVoteCount', () => {
+    it('changes vote count', () => {
+      const initialState = {
+        restaurants: RESTAURANTS,
+      };
+
+      const state = reducer(initialState, setVoteCount('no1'));
+      expect(state.restaurants[0].count).toBe(1);
     });
   });
 });

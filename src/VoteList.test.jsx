@@ -17,11 +17,11 @@ describe('VoteList', () => {
 
       const { container } = render((<VoteList restaurantItems={restaurantItems} />));
 
-      expect(container).toHaveTextContent('국수나무||0');
-      expect(container).toHaveTextContent('요기맘||0');
-      expect(container).toHaveTextContent('구내식당||0');
-      expect(container).toHaveTextContent('돈푸대||0');
-      expect(container).toHaveTextContent('태양식당||0');
+      expect(container).toHaveTextContent('국수나무0');
+      expect(container).toHaveTextContent('요기맘0');
+      expect(container).toHaveTextContent('구내식당0');
+      expect(container).toHaveTextContent('돈푸대0');
+      expect(container).toHaveTextContent('태양식당0');
     });
   });
 

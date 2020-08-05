@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -27,16 +27,28 @@ describe('VoteContainer', () => {
       { id: 'no4', name: '돈푸대', count: 0 },
       { id: 'no5', name: '태양식당', count: 0 },
     ]));
-    it('renders restaurants', () => {
-      const { container } = render((
-        <VoteContainer />
-      ));
 
-      expect(container).toHaveTextContent('국수나무||0');
-      expect(container).toHaveTextContent('요기맘||0');
-      expect(container).toHaveTextContent('구내식당||0');
-      expect(container).toHaveTextContent('돈푸대||0');
-      expect(container).toHaveTextContent('태양식당||0');
+    function rednerVoteContainer() {
+      return render(<VoteContainer />);
+    }
+    it('renders restaurants', () => {
+      const { container } = rednerVoteContainer();
+
+      expect(container).toHaveTextContent('국수나무0');
+      expect(container).toHaveTextContent('요기맘0');
+      expect(container).toHaveTextContent('구내식당0');
+      expect(container).toHaveTextContent('돈푸대0');
+      expect(container).toHaveTextContent('태양식당0');
+    });
+
+    it('listens click event', () => {
+      const { getByText } = rednerVoteContainer();
+      fireEvent.click(getByText('국수나무0'));
+
+      expect(dispatch).toBeCalledWith({
+        type: 'application/setVoteCount',
+        payload: 'no1',
+      });
     });
   });
   context('without restaurant', () => {

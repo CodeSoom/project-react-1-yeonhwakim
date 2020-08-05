@@ -14,6 +14,17 @@ const reducers = {
       restaurants,
     };
   },
+  setVoteCount(state, { payload: id }) {
+    const newRestaurants = [...state.restaurants];
+    const restaurantIndex = newRestaurants.findIndex((restaurant) => restaurant.id === id);
+    newRestaurants[restaurantIndex] = {
+      ...newRestaurants[restaurantIndex], count: newRestaurants[restaurantIndex].count + 1,
+    };
+    return {
+      ...state,
+      restaurants: newRestaurants,
+    };
+  },
 };
 
 const { actions, reducer } = createSlice({
@@ -24,6 +35,7 @@ const { actions, reducer } = createSlice({
 
 export const {
   setRestaurants,
+  setVoteCount,
 } = actions;
 
 export function loadRestaurants() {

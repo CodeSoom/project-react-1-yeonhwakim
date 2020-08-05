@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {
   loadRestaurants,
+  setVoteCount,
 } from './redux/slice';
 
 import { get } from './utils/utils';
@@ -19,9 +20,12 @@ export default function VoteContainer() {
 
   const restaurantItems = useSelector(get('restaurants'));
 
+  function handleClick(id) {
+    dispatch(setVoteCount(id));
+  }
   return (
     <>
-      <VoteList restaurantItems={restaurantItems} />
+      <VoteList restaurantItems={restaurantItems} handleClick={handleClick} />
     </>
   );
 }
