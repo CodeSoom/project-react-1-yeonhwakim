@@ -66,7 +66,10 @@ export function setSingleVote(id, voteId) {
     if (voteId) {
       dispatch(resetVoteCount(voteId));
     }
-    dispatch(setVoteCount(id));
+
+    if (voteId !== id) {
+      dispatch(setVoteCount(id));
+    }
   };
 }
 
