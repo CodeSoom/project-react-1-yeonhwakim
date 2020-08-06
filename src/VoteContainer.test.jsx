@@ -16,6 +16,7 @@ describe('VoteContainer', () => {
     useDispatch.mockImplementation(() => dispatch);
     useSelector.mockImplementation((selector) => selector({
       restaurants: given.restaurants,
+      voteId: given.voteId,
     }));
   });
 
@@ -28,9 +29,12 @@ describe('VoteContainer', () => {
       { id: 'no5', name: '태양식당', count: 0 },
     ]));
 
+    given('voteId', () => '');
+
     function rednerVoteContainer() {
       return render(<VoteContainer />);
     }
+
     it('renders restaurants', () => {
       const { container } = rednerVoteContainer();
 
@@ -43,14 +47,15 @@ describe('VoteContainer', () => {
 
     it('listens click event', () => {
       const { getByText } = rednerVoteContainer();
+
       fireEvent.click(getByText('국수나무0'));
 
       expect(dispatch).toBeCalledWith({
-        type: 'application/setVoteCount',
-        payload: 'no1',
+        type: 'application/setSingleVote',
       });
     });
   });
+
   context('without restaurant', () => {
     given('restaurants', () => ([]));
     it('renders loading message', () => {
