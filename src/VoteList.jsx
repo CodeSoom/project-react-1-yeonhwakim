@@ -2,7 +2,7 @@ import React from 'react';
 
 import VoteItem from './VoteItem';
 
-export default function VoteList({ restaurantItems, handleClick }) {
+export default function VoteList({ restaurantItems, handleClick, voteId }) {
   if (!(restaurantItems || []).length) {
     return (
       <>
@@ -19,6 +19,7 @@ export default function VoteList({ restaurantItems, handleClick }) {
         {restaurantItems.map((restaurantItem) => (
           <VoteItem
             restaurantItem={restaurantItem}
+            voteId={voteId}
             key={restaurantItem.id}
             onClick={handleClick}
           />
