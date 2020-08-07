@@ -4,11 +4,15 @@ import configureStore from 'redux-mock-store';
 
 import {
   loadRestaurants,
+  loadUser,
   setRestaurants,
   setSingleVote,
   setVoteCount,
+  setVoteId,
   resetVoteCount,
 } from './slice';
+
+import USER from '../../fixtures/user';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -17,6 +21,7 @@ jest.mock('../services/api');
 
 describe('actions', () => {
   let store;
+
   describe('loadRestaurants', () => {
     beforeEach(() => {
       store = mockStore([]);
@@ -28,6 +33,21 @@ describe('actions', () => {
       const actions = store.getActions();
 
       expect(actions[0]).toEqual(setRestaurants([]));
+    });
+  });
+
+  describe('loadUser', () => {
+    beforeEach(() => {
+      store = mockStore({});
+    });
+
+    it('runs loadUser', async () => {
+      const userId = 'user1';
+      await store.dispatch(loadUser(userId));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setVoteId(USER.voteId));
     });
   });
 

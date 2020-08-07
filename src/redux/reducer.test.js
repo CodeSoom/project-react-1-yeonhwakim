@@ -2,9 +2,11 @@ import reducer, {
   setRestaurants,
   setVoteCount,
   resetVoteCount,
+  setVoteId,
 } from './slice';
 
 import RESTAURANTS from '../../fixtures/restaurants';
+import USER from '../../fixtures/user';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
@@ -51,6 +53,17 @@ describe('reducer', () => {
 
       const state = reducer(initialState, resetVoteCount('no1'));
       expect(state.restaurants[0].count).toBe(RESTAURANTS[0].count - 1);
+    });
+  });
+
+  describe('setVoteId', () => {
+    it('changes vote id', () => {
+      const initialState = {
+        restaurants: RESTAURANTS,
+      };
+
+      const state = reducer(initialState, setVoteId('no1'));
+      expect(state.voteId).toBe(USER.voteId);
     });
   });
 });
