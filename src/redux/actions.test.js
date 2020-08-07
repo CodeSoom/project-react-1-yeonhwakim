@@ -36,10 +36,10 @@ describe('actions', () => {
       store = mockStore({});
     });
 
-    context('with voteId', () => {
+    context('without voteId', () => {
       it('runs setSingleVote', async () => {
-        const id = 'no1';
         const voteId = '';
+        const id = 'no1';
 
         await store.dispatch(setSingleVote(id, voteId));
 
@@ -49,7 +49,21 @@ describe('actions', () => {
       });
     });
 
-    context('without voteId', () => {
+    context('with voteId', () => {
+      it('runs setSingleVote', async () => {
+        const voteId = 'no1';
+        const id = 'no2';
+
+        await store.dispatch(setSingleVote(id, voteId));
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(resetVoteCount(voteId));
+        expect(actions[1]).toEqual(setVoteCount(id));
+      });
+    });
+
+    context('same id and voteId', () => {
       it('runs setSingleVote', async () => {
         const id = 'no1';
         const voteId = 'no1';
@@ -59,7 +73,6 @@ describe('actions', () => {
         const actions = store.getActions();
 
         expect(actions[0]).toEqual(resetVoteCount(voteId));
-        expect(actions[1]).toEqual(setVoteCount(id));
       });
     });
   });
