@@ -29,6 +29,7 @@ export default function VoteContainer() {
     <>
       <VoteList
         restaurantItems={restaurantItems}
+        voteId={voteId}
         handleClick={handleClick}
       />
     </>

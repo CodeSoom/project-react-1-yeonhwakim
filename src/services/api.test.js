@@ -1,8 +1,10 @@
 import {
   fetchRestaurants,
+  fetchUser,
 } from './api';
 
 import RESTAURANTS from '../../fixtures/restaurants';
+import USER from '../../fixtures/user';
 
 describe('api', () => {
   const mockFetch = (data) => {
@@ -20,6 +22,19 @@ describe('api', () => {
       const restaurants = await fetchRestaurants();
 
       expect(restaurants).toEqual(RESTAURANTS);
+    });
+  });
+
+  describe('fetchUser', () => {
+    beforeEach(() => {
+      mockFetch(USER);
+    });
+
+    it('returns restaurants', async () => {
+      const userId = 'no1';
+      const user = await fetchUser(userId);
+
+      expect(user).toEqual(USER);
     });
   });
 });

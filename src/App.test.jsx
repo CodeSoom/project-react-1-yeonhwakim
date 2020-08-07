@@ -6,7 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import App from './App';
 
+import { loadItem, saveItem } from './services/storage';
+
 jest.mock('react-redux');
+jest.mock('./services/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
@@ -33,5 +36,36 @@ describe('App', () => {
       <App />
     ));
     expect(dispatch).toBeCalled();
+  });
+
+  context('without local storage token', () => {
+    const accessToken = 'user1';
+
+    beforeEach(() => {
+      loadItem.mockImplementation(() => null);
+    });
+
+    it('save token', () => {
+      render((
+        <App />
+      ));
+      saveItem.mockImplementation(() => accessToken);
+      expect(saveItem('accessToken')).toBe(accessToken);
+    });
+  });
+
+  context('with local storage token', () => {
+    const accessToken = 'user1';
+
+    beforeEach(() => {
+      loadItem.mockImplementation(() => accessToken);
+    });
+
+    it('loadUser', () => {
+      render((
+        <App />
+      ));
+      expect(dispatch).toBeCalledTimes(2);
+    });
   });
 });

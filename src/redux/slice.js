@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import {
   fetchRestaurants,
+  fetchUser,
 } from '../services/api';
 
 const initialState = {
@@ -39,6 +40,12 @@ const reducers = {
       restaurants: newRestaurants,
     };
   },
+  setVoteId(state, { payload: id }) {
+    return {
+      ...state,
+      voteId: id,
+    };
+  },
 };
 
 const { actions, reducer } = createSlice({
@@ -51,6 +58,7 @@ export const {
   setRestaurants,
   setVoteCount,
   resetVoteCount,
+  setVoteId,
 } = actions;
 
 export function loadRestaurants() {
@@ -58,6 +66,13 @@ export function loadRestaurants() {
     const restaurants = await fetchRestaurants();
 
     dispatch(setRestaurants(restaurants));
+  };
+}
+
+export function loadUser(userId) {
+  return async (dispatch) => {
+    const user = await fetchUser(userId);
+    dispatch(setVoteId(user.voteId));
   };
 }
 

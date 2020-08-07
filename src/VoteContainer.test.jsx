@@ -50,9 +50,7 @@ describe('VoteContainer', () => {
 
       fireEvent.click(getByText('국수나무0'));
 
-      expect(dispatch).toBeCalledWith({
-        type: 'application/setSingleVote',
-      });
+      expect(dispatch).toBeCalledTimes(2);
     });
   });
 
