@@ -5,6 +5,9 @@ export async function fetchRestaurants() {
   return data;
 }
 
-export function sample() {
-
+export async function fetchUser(userId) {
+  const url = `http://localhost:3000/users/${userId}`;
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
 }

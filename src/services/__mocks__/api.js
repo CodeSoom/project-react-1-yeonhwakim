@@ -2,6 +2,6 @@ export async function fetchRestaurants() {
   return [];
 }
 
-export function fetch() {
-
+export function fetchUser(userId) {
+  return { id: userId };
 }
