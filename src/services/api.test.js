@@ -2,6 +2,7 @@ import {
   fetchRestaurants,
   fetchUser,
   updateCount,
+  updateVoteId,
 } from './api';
 
 import RESTAURANTS from '../../fixtures/restaurants';
@@ -44,6 +45,16 @@ describe('api', () => {
       const voteId = 'no1';
       const count = '1';
       const result = await updateCount({ voteId, count });
+
+      expect(result).toBeUndefined();
+    });
+  });
+
+  describe('updateVoteId', () => {
+    it('updates vote id', async () => {
+      const userId = 'user1';
+      const voteId = 'no1';
+      const result = await updateVoteId({ userId, voteId });
 
       expect(result).toBeUndefined();
     });

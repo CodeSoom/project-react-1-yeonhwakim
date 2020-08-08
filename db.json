@@ -1,15 +1,47 @@
 {
   "restaurants": [
-    { "id": "no1", "name": "국수나무", "count": 2 },
-    { "id": "no2", "name": "요기맘", "count": 1 },
-    { "id": "no3", "name": "구내식당", "count": 0 },
-    { "id": "no4", "name": "돈푸대", "count": 0 },
-    { "id": "no5", "name": "태양식당", "count": 0 }
+    {
+      "id": "no1",
+      "name": "국수나무",
+      "count": 5
+    },
+    {
+      "id": "no2",
+      "name": "요기맘",
+      "count": 1
+    },
+    {
+      "id": "no3",
+      "name": "구내식당",
+      "count": 0
+    },
+    {
+      "id": "no4",
+      "name": "돈푸대",
+      "count": 0
+    },
+    {
+      "id": "no5",
+      "name": "태양식당",
+      "count": 0
+    }
   ],
   "users": [
-    { "id": "user1", "voteId": "no1" },
-    { "id": "user2", "voteId": "no1" },
-    { "id": "user3", "voteId": "no2" },
-    { "id": "user4", "voteId": "" }
+    {
+      "id": "user1",
+      "voteId": "no1"
+    },
+    {
+      "id": "user2",
+      "voteId": "no1"
+    },
+    {
+      "id": "user3",
+      "voteId": "no2"
+    },
+    {
+      "id": "user4",
+      "voteId": ""
+    }
   ]
 }
