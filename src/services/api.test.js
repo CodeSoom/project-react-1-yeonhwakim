@@ -1,11 +1,13 @@
 import {
   fetchRestaurants,
+  fetchUsers,
   fetchUser,
   updateCount,
   updateVoteId,
 } from './api';
 
 import RESTAURANTS from '../../fixtures/restaurants';
+import USERS from '../../fixtures/users';
 import USER from '../../fixtures/user';
 
 describe('api', () => {
@@ -27,12 +29,24 @@ describe('api', () => {
     });
   });
 
+  describe('fetchUsers', () => {
+    beforeEach(() => {
+      mockFetch(USERS);
+    });
+
+    it('returns users', async () => {
+      const user = await fetchUsers();
+
+      expect(user).toEqual(USERS);
+    });
+  });
+
   describe('fetchUser', () => {
     beforeEach(() => {
       mockFetch(USER);
     });
 
-    it('returns restaurants', async () => {
+    it('returns user', async () => {
       const userId = 'no1';
       const user = await fetchUser(userId);
 

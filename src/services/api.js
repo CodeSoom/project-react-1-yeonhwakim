@@ -5,6 +5,13 @@ export async function fetchRestaurants() {
   return data;
 }
 
+export async function fetchUsers() {
+  const url = 'http://localhost:3000/users';
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
+}
+
 export async function fetchUser(userId) {
   const url = `http://localhost:3000/users/${userId}`;
   const response = await fetch(url);

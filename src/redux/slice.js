@@ -16,6 +16,7 @@ const reducers = {
       restaurants,
     };
   },
+
   setVoteCount(state, { payload: id }) {
     const newRestaurants = [...state.restaurants];
     const restaurantIndex = newRestaurants.findIndex((restaurant) => restaurant.id === id);
@@ -28,6 +29,7 @@ const reducers = {
       restaurants: newRestaurants,
     };
   },
+
   resetVoteCount(state, { payload: id }) {
     const newRestaurants = [...state.restaurants];
     const restaurantIndex = newRestaurants.findIndex((restaurant) => restaurant.id === id);
@@ -40,6 +42,7 @@ const reducers = {
       restaurants: newRestaurants,
     };
   },
+
   setVoteId(state, { payload: id }) {
     return {
       ...state,
