@@ -118,7 +118,8 @@ export function loadUser(userId) {
   return async (dispatch) => {
     const user = await fetchUser(userId);
 
-    dispatch(setVoteId(user.voteId));
+    await dispatch(setUserId(user.id));
+    await dispatch(setVoteId(user.voteId));
   };
 }
 

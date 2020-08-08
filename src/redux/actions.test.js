@@ -8,9 +8,10 @@ import {
   loadUser,
   setRestaurants,
   setCounts,
+  setUserId,
+  setVoteId,
   setSingleVote,
   setVoteCount,
-  setVoteId,
   resetVoteCount,
 } from './slice';
 
@@ -66,7 +67,8 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setVoteId(USER.voteId));
+      expect(actions[0]).toEqual(setUserId(USER.id));
+      expect(actions[1]).toEqual(setVoteId(USER.voteId));
     });
   });
 
