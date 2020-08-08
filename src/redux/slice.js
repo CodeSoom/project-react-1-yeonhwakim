@@ -46,34 +46,6 @@ const reducers = {
     };
   },
 
-  setVoteCount(state, { payload: id }) {
-    const newRestaurants = [...state.restaurants];
-    const restaurantIndex = newRestaurants.findIndex((restaurant) => restaurant.id === id);
-    newRestaurants[restaurantIndex] = {
-      ...newRestaurants[restaurantIndex], count: newRestaurants[restaurantIndex].count + 1,
-    };
-
-    return {
-      ...state,
-      voteId: id,
-      restaurants: newRestaurants,
-    };
-  },
-
-  resetVoteCount(state, { payload: id }) {
-    const newRestaurants = [...state.restaurants];
-    const restaurantIndex = newRestaurants.findIndex((restaurant) => restaurant.id === id);
-    newRestaurants[restaurantIndex] = {
-      ...newRestaurants[restaurantIndex], count: newRestaurants[restaurantIndex].count - 1,
-    };
-
-    return {
-      ...state,
-      voteId: '',
-      restaurants: newRestaurants,
-    };
-  },
-
   setVoteId(state, { payload: id }) {
     return {
       ...state,
@@ -132,18 +104,6 @@ export function sendVoteId(newId) {
     await updateVoteId({ userId, voteId: id });
 
     await dispatch(setVoteId(id));
-  };
-}
-
-export function setSingleVote(id, voteId) {
-  return (dispatch) => {
-    if (voteId) {
-      dispatch(resetVoteCount(voteId));
-    }
-
-    if (voteId !== id) {
-      dispatch(setVoteCount(id));
-    }
   };
 }
 

@@ -11,9 +11,6 @@ import {
   setCounts,
   setUserId,
   setVoteId,
-  setSingleVote,
-  setVoteCount,
-  resetVoteCount,
 } from './slice';
 
 import APIRESTAURANTS from '../../fixtures/apiRestaurants';
@@ -85,52 +82,6 @@ describe('actions', () => {
       const actions = store.getActions();
 
       expect(actions[0]).toEqual(setVoteId(voteId));
-    });
-  });
-
-  describe('setSingleVote', () => {
-    beforeEach(() => {
-      store = mockStore({});
-    });
-
-    context('without voteId', () => {
-      it('runs setSingleVote', async () => {
-        const voteId = '';
-        const id = 'no1';
-
-        await store.dispatch(setSingleVote(id, voteId));
-
-        const actions = store.getActions();
-
-        expect(actions[0]).toEqual(setVoteCount(id));
-      });
-    });
-
-    context('with voteId', () => {
-      it('runs setSingleVote', async () => {
-        const voteId = 'no1';
-        const id = 'no2';
-
-        await store.dispatch(setSingleVote(id, voteId));
-
-        const actions = store.getActions();
-
-        expect(actions[0]).toEqual(resetVoteCount(voteId));
-        expect(actions[1]).toEqual(setVoteCount(id));
-      });
-    });
-
-    context('same id and voteId', () => {
-      it('runs setSingleVote', async () => {
-        const id = 'no1';
-        const voteId = 'no1';
-
-        await store.dispatch(setSingleVote(id, voteId));
-
-        const actions = store.getActions();
-
-        expect(actions[0]).toEqual(resetVoteCount(voteId));
-      });
     });
   });
 });

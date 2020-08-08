@@ -2,7 +2,6 @@ import {
   fetchRestaurants,
   fetchUsers,
   fetchUser,
-  updateCount,
   updateVoteId,
 } from './api';
 
@@ -51,16 +50,6 @@ describe('api', () => {
       const user = await fetchUser(userId);
 
       expect(user).toEqual(USER);
-    });
-  });
-
-  describe('updateCount', () => {
-    it('updates count', async () => {
-      const voteId = 'no1';
-      const count = '1';
-      const result = await updateCount({ voteId, count });
-
-      expect(result).toBeUndefined();
     });
   });
 

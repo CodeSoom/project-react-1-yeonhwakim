@@ -2,8 +2,6 @@ import reducer, {
   setRestaurants,
   setCounts,
   setUserId,
-  setVoteCount,
-  resetVoteCount,
   setVoteId,
 } from './slice';
 
@@ -58,28 +56,6 @@ describe('reducer', () => {
 
       const state = reducer(initialState, setUserId(USERS.id));
       expect(state.userId).toBe(USERS.id);
-    });
-  });
-
-  describe('setVoteCount', () => {
-    it('changes vote count', () => {
-      const initialState = {
-        restaurants: RESTAURANTS,
-      };
-
-      const state = reducer(initialState, setVoteCount('no1'));
-      expect(state.restaurants[0].count).toBe(RESTAURANTS[0].count + 1);
-    });
-  });
-
-  describe('resetVoteCount', () => {
-    it('changes vote count', () => {
-      const initialState = {
-        restaurants: RESTAURANTS,
-      };
-
-      const state = reducer(initialState, resetVoteCount('no1'));
-      expect(state.restaurants[0].count).toBe(RESTAURANTS[0].count - 1);
     });
   });
 
