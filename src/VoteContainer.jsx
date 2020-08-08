@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {
   loadRestaurants,
-  setSingleVote,
+  sendVoteId,
 } from './redux/slice';
 
 import { get } from './utils/utils';
@@ -22,7 +22,8 @@ export default function VoteContainer() {
   const voteId = useSelector(get('voteId'));
 
   function handleClick(id) {
-    dispatch(setSingleVote(id, voteId));
+    dispatch(sendVoteId(id));
+    dispatch(loadRestaurants());
   }
 
   return (

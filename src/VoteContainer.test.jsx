@@ -50,7 +50,7 @@ describe('VoteContainer', () => {
 
       fireEvent.click(getByText('국수나무0'));
 
-      expect(dispatch).toBeCalledTimes(2);
+      expect(dispatch).toBeCalledTimes(3);
     });
   });
 
