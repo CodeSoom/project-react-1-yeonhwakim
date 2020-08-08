@@ -11,3 +11,14 @@ export async function fetchUser(userId) {
   const data = await response.json();
   return data;
 }
+
+export async function updateCount({ voteId, count }) {
+  const url = `http://localhost:3000/restaurants/${voteId}`;
+  await fetch(url, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ count }),
+  });
+}

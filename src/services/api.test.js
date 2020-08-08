@@ -1,6 +1,7 @@
 import {
   fetchRestaurants,
   fetchUser,
+  updateCount,
 } from './api';
 
 import RESTAURANTS from '../../fixtures/restaurants';
@@ -35,6 +36,16 @@ describe('api', () => {
       const user = await fetchUser(userId);
 
       expect(user).toEqual(USER);
+    });
+  });
+
+  describe('updateCount', () => {
+    it('updates count', async () => {
+      const voteId = 'no1';
+      const count = '1';
+      const result = await updateCount({ voteId, count });
+
+      expect(result).toBeUndefined();
     });
   });
 });
