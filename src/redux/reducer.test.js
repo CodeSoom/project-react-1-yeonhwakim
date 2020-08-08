@@ -1,6 +1,7 @@
 import reducer, {
   setRestaurants,
   setCounts,
+  setUserId,
   setVoteCount,
   resetVoteCount,
   setVoteId,
@@ -15,6 +16,7 @@ describe('reducer', () => {
     const initialState = {
       restaurants: [],
       voteId: '',
+      userId: '',
     };
 
     it('returns initialState', () => {
@@ -44,6 +46,18 @@ describe('reducer', () => {
 
       const state = reducer(initialState, setCounts(USERS));
       expect(state.restaurants[0].count).toBe(2);
+    });
+  });
+
+  describe('setUserId', () => {
+    it('set user id', () => {
+      const initialState = {
+        restaurants: RESTAURANTS,
+        userId: USER.id,
+      };
+
+      const state = reducer(initialState, setUserId(USERS.id));
+      expect(state.userId).toBe(USERS.id);
     });
   });
 

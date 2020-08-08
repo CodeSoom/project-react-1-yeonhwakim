@@ -9,12 +9,39 @@ import {
 const initialState = {
   restaurants: [],
   voteId: '',
+  userId: '',
 };
 const reducers = {
   setRestaurants(state, { payload: restaurants }) {
     return {
       ...state,
       restaurants,
+    };
+  },
+
+  setCounts(state, { payload: users }) {
+    const countsObj = {};
+    users.forEach((count) => {
+      countsObj[count.voteId] = countsObj[count.voteId] === undefined
+        ? 1
+        : countsObj[count.voteId] + 1;
+    });
+
+    return {
+      ...state,
+      restaurants: state.restaurants.map((restaurant) => (
+        {
+          ...restaurant,
+          count: countsObj[restaurant.id] || 0,
+        }
+      )),
+    };
+  },
+
+  setUserId(state, { payload: id }) {
+    return {
+      ...state,
+      userId: id,
     };
   },
 
@@ -52,25 +79,6 @@ const reducers = {
       voteId: id,
     };
   },
-
-  setCounts(state, { payload: users }) {
-    const countsObj = {};
-    users.forEach((count) => {
-      countsObj[count.voteId] = countsObj[count.voteId] === undefined
-        ? 1
-        : countsObj[count.voteId] + 1;
-    });
-
-    return {
-      ...state,
-      restaurants: state.restaurants.map((restaurant) => (
-        {
-          ...restaurant,
-          count: countsObj[restaurant.id] || 0,
-        }
-      )),
-    };
-  },
 };
 
 const { actions, reducer } = createSlice({
@@ -82,6 +90,7 @@ const { actions, reducer } = createSlice({
 export const {
   setRestaurants,
   setCounts,
+  setUserId,
   setVoteCount,
   resetVoteCount,
   setVoteId,
