@@ -49,6 +49,24 @@ const reducers = {
       voteId: id,
     };
   },
+
+  setCounts(state, { payload: counts }) {
+    const countsObj = {};
+    counts.forEach((count) => {
+      countsObj[count.voteId] = countsObj[count.voteId] === undefined
+        ? 1
+        : countsObj[count.voteId] + 1;
+    });
+    return {
+      ...state,
+      restaurants: state.restaurants.map((restaurant) => (
+        {
+          ...restaurant,
+          count: countsObj[restaurant.id] || 0,
+        }
+      )),
+    };
+  },
 };
 
 const { actions, reducer } = createSlice({
@@ -59,6 +77,7 @@ const { actions, reducer } = createSlice({
 
 export const {
   setRestaurants,
+  setCounts,
   setVoteCount,
   resetVoteCount,
   setVoteId,
