@@ -124,13 +124,14 @@ export function loadUser(userId) {
   };
 }
 
-export function sendVoteId(voteId) {
+export function sendVoteId(newId) {
   return async (dispatch, getState) => {
-    const { userId } = getState();
+    const { userId, voteId } = getState();
+    const id = voteId === newId ? '' : newId;
 
-    await updateVoteId({ userId, voteId });
+    await updateVoteId({ userId, voteId: id });
 
-    await dispatch(setVoteId(voteId));
+    await dispatch(setVoteId(id));
   };
 }
 
