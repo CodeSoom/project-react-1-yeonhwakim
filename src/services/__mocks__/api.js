@@ -1,9 +1,9 @@
-import APIRESTAURANTS from '../../../fixtures/apiRestaurants';
+import APIVOTELIST from '../../../fixtures/apiVoteList';
 import USERS from '../../../fixtures/users';
 import USER from '../../../fixtures/user';
 
-export async function fetchRestaurants() {
-  return APIRESTAURANTS;
+export async function fetchVoteList() {
+  return APIVOTELIST;
 }
 
 export function fetchUsers() {

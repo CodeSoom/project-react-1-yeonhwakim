@@ -3,17 +3,17 @@ import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 
 import {
-  loadRestaurants,
+  loadVoteList,
   loadUsers,
   loadUser,
   sendVoteId,
-  setRestaurants,
+  setVoteList,
   setCounts,
   setUserId,
   setVoteId,
 } from './slice';
 
-import APIRESTAURANTS from '../../fixtures/apiRestaurants';
+import APIVOTELIST from '../../fixtures/apiVoteList';
 import USERS from '../../fixtures/users';
 import USER from '../../fixtures/user';
 
@@ -25,17 +25,17 @@ jest.mock('../services/api');
 describe('actions', () => {
   let store;
 
-  describe('loadRestaurants', () => {
+  describe('loadVoteList', () => {
     beforeEach(() => {
       store = mockStore([]);
     });
 
-    it('runs setRestaurants', async () => {
-      await store.dispatch(loadRestaurants());
+    it('runs setVoteList', async () => {
+      await store.dispatch(loadVoteList());
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setRestaurants(APIRESTAURANTS));
+      expect(actions[0]).toEqual(setVoteList(APIVOTELIST));
       expect(actions[1]).toEqual(setCounts(USERS));
     });
   });

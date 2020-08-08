@@ -2,8 +2,8 @@ import React from 'react';
 
 import VoteItem from './VoteItem';
 
-export default function VoteList({ restaurantItems, handleClick, voteId }) {
-  if (!(restaurantItems || []).length) {
+export default function VoteList({ voteList, handleClick, voteId }) {
+  if (!(voteList || []).length) {
     return (
       <>
         <p>
@@ -16,11 +16,11 @@ export default function VoteList({ restaurantItems, handleClick, voteId }) {
   return (
     <>
       <ul>
-        {restaurantItems.map((restaurantItem) => (
+        {voteList.map((voteItem) => (
           <VoteItem
-            restaurantItem={restaurantItem}
+            voteItem={voteItem}
             voteId={voteId}
-            key={restaurantItem.id}
+            key={voteItem.id}
             onClick={handleClick}
           />
         ))}

@@ -1,5 +1,5 @@
-export async function fetchRestaurants() {
-  const url = 'http://localhost:3000/restaurants';
+export async function fetchVoteList() {
+  const url = 'http://localhost:3000/voteList';
   const response = await fetch(url);
   const data = await response.json();
   return data;

@@ -15,7 +15,7 @@ describe('VotePage', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
-      restaurants: [],
+      voteList: [],
     }));
   });
 
@@ -26,7 +26,7 @@ describe('VotePage', () => {
     expect(container).toHaveTextContent('Vote for lunch!!!');
   });
 
-  it('loads restaurants list', () => {
+  it('loads vote list', () => {
     render((
       <VotePage />
     ));

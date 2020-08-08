@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function VoteItem({ restaurantItem: { name, count, id }, onClick, voteId }) {
+export default function VoteItem({ voteItem: { name, count, id }, onClick, voteId }) {
   return (
     <>
       <li>

@@ -15,13 +15,13 @@ describe('VoteContainer', () => {
     dispatch.mockClear();
     useDispatch.mockImplementation(() => dispatch);
     useSelector.mockImplementation((selector) => selector({
-      restaurants: given.restaurants,
+      voteList: given.voteList,
       voteId: given.voteId,
     }));
   });
 
-  context('with restaurant', () => {
-    given('restaurants', () => ([
+  context('with voteList', () => {
+    given('voteList', () => ([
       { id: 'no1', name: '국수나무', count: 0 },
       { id: 'no2', name: '요기맘', count: 0 },
       { id: 'no3', name: '구내식당', count: 0 },
@@ -35,7 +35,7 @@ describe('VoteContainer', () => {
       return render(<VoteContainer />);
     }
 
-    it('renders restaurants', () => {
+    it('renders voteList', () => {
       const { container } = rednerVoteContainer();
 
       expect(container).toHaveTextContent('국수나무0');
@@ -54,8 +54,8 @@ describe('VoteContainer', () => {
     });
   });
 
-  context('without restaurant', () => {
-    given('restaurants', () => ([]));
+  context('without voteList', () => {
+    given('voteList', () => ([]));
     it('renders loading message', () => {
       const { container } = render((
         <VoteContainer />

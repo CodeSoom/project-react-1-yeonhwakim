@@ -1,22 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import {
-  fetchRestaurants,
+  fetchVoteList,
   fetchUsers,
   fetchUser,
   updateVoteId,
 } from '../services/api';
 
 const initialState = {
-  restaurants: [],
+  voteList: [],
   voteId: '',
   userId: '',
 };
 const reducers = {
-  setRestaurants(state, { payload: restaurants }) {
+  setVoteList(state, { payload: voteList }) {
     return {
       ...state,
-      restaurants,
+      voteList,
     };
   },
 
@@ -30,10 +30,10 @@ const reducers = {
 
     return {
       ...state,
-      restaurants: state.restaurants.map((restaurant) => (
+      voteList: state.voteList.map((voteItem) => (
         {
-          ...restaurant,
-          count: countsObj[restaurant.id] || 0,
+          ...voteItem,
+          count: countsObj[voteItem.id] || 0,
         }
       )),
     };
@@ -61,7 +61,7 @@ const { actions, reducer } = createSlice({
 });
 
 export const {
-  setRestaurants,
+  setVoteList,
   setCounts,
   setUserId,
   setVoteCount,
@@ -69,12 +69,12 @@ export const {
   setVoteId,
 } = actions;
 
-export function loadRestaurants() {
+export function loadVoteList() {
   return async (dispatch) => {
-    const restaurants = await fetchRestaurants();
+    const voteList = await fetchVoteList();
     const users = await fetchUsers();
 
-    await dispatch(setRestaurants(restaurants));
+    await dispatch(setVoteList(voteList));
     await dispatch(setCounts(users));
   };
 }

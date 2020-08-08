@@ -1,18 +1,18 @@
 import reducer, {
-  setRestaurants,
+  setVoteList,
   setCounts,
   setUserId,
   setVoteId,
 } from './slice';
 
-import RESTAURANTS from '../../fixtures/restaurants';
+import VOTELIST from '../../fixtures/voteLsit';
 import USERS from '../../fixtures/users';
 import USER from '../../fixtures/user';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
     const initialState = {
-      restaurants: [],
+      voteList: [],
       voteId: '',
       userId: '',
     };
@@ -24,33 +24,33 @@ describe('reducer', () => {
     });
   });
 
-  describe('setRestaurants', () => {
-    it('changes restaurants', () => {
+  describe('setVoteList', () => {
+    it('changes voteList', () => {
       const initialState = {
-        restaurants: [],
+        voteList: [],
       };
 
-      const state = reducer(initialState, setRestaurants(RESTAURANTS));
+      const state = reducer(initialState, setVoteList(VOTELIST));
 
-      expect(state.restaurants).toHaveLength(5);
+      expect(state.voteList).toHaveLength(5);
     });
   });
 
   describe('setCounts', () => {
     it('set vote count', () => {
       const initialState = {
-        restaurants: RESTAURANTS,
+        voteList: VOTELIST,
       };
 
       const state = reducer(initialState, setCounts(USERS));
-      expect(state.restaurants[0].count).toBe(2);
+      expect(state.voteList[0].count).toBe(2);
     });
   });
 
   describe('setUserId', () => {
     it('set user id', () => {
       const initialState = {
-        restaurants: RESTAURANTS,
+        voteList: VOTELIST,
         userId: USER.id,
       };
 
@@ -62,7 +62,7 @@ describe('reducer', () => {
   describe('setVoteId', () => {
     it('changes vote id', () => {
       const initialState = {
-        restaurants: RESTAURANTS,
+        voteList: VOTELIST,
       };
 
       const state = reducer(initialState, setVoteId('no1'));

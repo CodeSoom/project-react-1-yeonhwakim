@@ -1,11 +1,11 @@
 import {
-  fetchRestaurants,
+  fetchVoteList,
   fetchUsers,
   fetchUser,
   updateVoteId,
 } from './api';
 
-import RESTAURANTS from '../../fixtures/restaurants';
+import VoteList from '../../fixtures/voteLsit';
 import USERS from '../../fixtures/users';
 import USER from '../../fixtures/user';
 
@@ -16,15 +16,15 @@ describe('api', () => {
     });
   };
 
-  describe('fetchRestaurants', () => {
+  describe('fetchVoteList', () => {
     beforeEach(() => {
-      mockFetch(RESTAURANTS);
+      mockFetch(VoteList);
     });
 
-    it('returns restaurants', async () => {
-      const restaurants = await fetchRestaurants();
+    it('returns voteList', async () => {
+      const voteList = await fetchVoteList();
 
-      expect(restaurants).toEqual(RESTAURANTS);
+      expect(voteList).toEqual(VoteList);
     });
   });
 
