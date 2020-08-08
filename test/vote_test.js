@@ -1,6 +1,6 @@
 Feature('Vote');
 
-const restaurants = [
+const voteList = [
   { id: 'no1', name: '국수나무' },
   { id: 'no2', name: '요기맘' },
   { id: 'no3', name: '구내식당' },
@@ -10,26 +10,26 @@ const restaurants = [
 
 Scenario('투표리스트가 보인다.', (I) => {
   I.amOnPage('/');
-  restaurants.forEach((restaurant) => I.see(restaurant.name));
+  voteList.forEach((voteItem) => I.see(voteItem.name));
 });
 
 Scenario('식당을 클리하면 투표수가 올라간다.', (I) => {
   I.amOnPage('/');
-  restaurants.forEach((restaurant) => {
-    I.click(`${restaurant.name}`);
-    I.see('1', `.${restaurant.id}Count`);
+  voteList.forEach((voteItem) => {
+    I.click(`${voteItem.name}`);
+    I.see('1', `.${voteItem.id}Count`);
   });
 });
 
 Scenario('클릭 한 것을 또 클릭하면 투표수가 줄어든다.(반복 투표 방지)', (I) => {
   I.amOnPage('/');
-  restaurants.forEach((restaurant) => {
-    I.click(`${restaurant.name}`);
-    I.see('1', `.${restaurant.id}Count`);
+  voteList.forEach((voteItem) => {
+    I.click(`${voteItem.name}`);
+    I.see('1', `.${voteItem.id}Count`);
   });
-  restaurants.forEach((restaurant) => {
-    I.click(`${restaurant.name}`);
-    I.see('0', `.${restaurant.id}Count`);
+  voteList.forEach((voteItem) => {
+    I.click(`${voteItem.name}`);
+    I.see('0', `.${voteItem.id}Count`);
   });
 });
 

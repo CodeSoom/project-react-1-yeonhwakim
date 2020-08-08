@@ -1,18 +1,20 @@
 import reducer, {
-  setRestaurants,
-  setVoteCount,
-  resetVoteCount,
+  setVoteList,
+  setCounts,
+  setUserId,
   setVoteId,
 } from './slice';
 
-import RESTAURANTS from '../../fixtures/restaurants';
+import VOTELIST from '../../fixtures/voteLsit';
+import USERS from '../../fixtures/users';
 import USER from '../../fixtures/user';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
     const initialState = {
-      restaurants: [],
+      voteList: [],
       voteId: '',
+      userId: '',
     };
 
     it('returns initialState', () => {
@@ -22,44 +24,45 @@ describe('reducer', () => {
     });
   });
 
-  describe('setRestaurants', () => {
-    it('changes restaurants', () => {
+  describe('setVoteList', () => {
+    it('changes voteList', () => {
       const initialState = {
-        restaurants: [],
+        voteList: [],
       };
 
-      const state = reducer(initialState, setRestaurants(RESTAURANTS));
+      const state = reducer(initialState, setVoteList(VOTELIST));
 
-      expect(state.restaurants).toHaveLength(5);
+      expect(state.voteList).toHaveLength(5);
     });
   });
 
-  describe('setVoteCount', () => {
-    it('changes vote count', () => {
+  describe('setCounts', () => {
+    it('set vote count', () => {
       const initialState = {
-        restaurants: RESTAURANTS,
+        voteList: VOTELIST,
       };
 
-      const state = reducer(initialState, setVoteCount('no1'));
-      expect(state.restaurants[0].count).toBe(RESTAURANTS[0].count + 1);
+      const state = reducer(initialState, setCounts(USERS));
+      expect(state.voteList[0].count).toBe(2);
     });
   });
 
-  describe('resetVoteCount', () => {
-    it('changes vote count', () => {
+  describe('setUserId', () => {
+    it('set user id', () => {
       const initialState = {
-        restaurants: RESTAURANTS,
+        voteList: VOTELIST,
+        userId: USER.id,
       };
 
-      const state = reducer(initialState, resetVoteCount('no1'));
-      expect(state.restaurants[0].count).toBe(RESTAURANTS[0].count - 1);
+      const state = reducer(initialState, setUserId(USERS.id));
+      expect(state.userId).toBe(USERS.id);
     });
   });
 
   describe('setVoteId', () => {
     it('changes vote id', () => {
       const initialState = {
-        restaurants: RESTAURANTS,
+        voteList: VOTELIST,
       };
 
       const state = reducer(initialState, setVoteId('no1'));

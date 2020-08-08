@@ -3,8 +3,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  loadRestaurants,
-  setSingleVote,
+  loadVoteList,
+  sendVoteId,
 } from './redux/slice';
 
 import { get } from './utils/utils';
@@ -15,20 +15,21 @@ export default function VoteContainer() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadRestaurants());
+    dispatch(loadVoteList());
   }, []);
 
-  const restaurantItems = useSelector(get('restaurants'));
+  const voteList = useSelector(get('voteList'));
   const voteId = useSelector(get('voteId'));
 
   function handleClick(id) {
-    dispatch(setSingleVote(id, voteId));
+    dispatch(sendVoteId(id));
+    dispatch(loadVoteList());
   }
 
   return (
     <>
       <VoteList
-        restaurantItems={restaurantItems}
+        voteList={voteList}
         voteId={voteId}
         handleClick={handleClick}
       />

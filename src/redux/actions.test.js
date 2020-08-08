@@ -3,15 +3,18 @@ import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 
 import {
-  loadRestaurants,
+  loadVoteList,
+  loadUsers,
   loadUser,
-  setRestaurants,
-  setSingleVote,
-  setVoteCount,
+  sendVoteId,
+  setVoteList,
+  setCounts,
+  setUserId,
   setVoteId,
-  resetVoteCount,
 } from './slice';
 
+import APIVOTELIST from '../../fixtures/apiVoteList';
+import USERS from '../../fixtures/users';
 import USER from '../../fixtures/user';
 
 const middlewares = [thunk];
@@ -22,17 +25,32 @@ jest.mock('../services/api');
 describe('actions', () => {
   let store;
 
-  describe('loadRestaurants', () => {
+  describe('loadVoteList', () => {
     beforeEach(() => {
       store = mockStore([]);
     });
 
-    it('runs setRestaurants', async () => {
-      await store.dispatch(loadRestaurants());
+    it('runs setVoteList', async () => {
+      await store.dispatch(loadVoteList());
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setRestaurants([]));
+      expect(actions[0]).toEqual(setVoteList(APIVOTELIST));
+      expect(actions[1]).toEqual(setCounts(USERS));
+    });
+  });
+
+  describe('loadUsers', () => {
+    beforeEach(() => {
+      store = mockStore({});
+    });
+
+    it('runs loadUsers', async () => {
+      await store.dispatch(loadUsers());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setCounts(USERS));
     });
   });
 
@@ -47,53 +65,23 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setVoteId(USER.voteId));
+      expect(actions[0]).toEqual(setUserId(USER.id));
+      expect(actions[1]).toEqual(setVoteId(USER.voteId));
     });
   });
 
-  describe('setSingleVote', () => {
+  describe('sendVoteId', () => {
     beforeEach(() => {
       store = mockStore({});
     });
 
-    context('without voteId', () => {
-      it('runs setSingleVote', async () => {
-        const voteId = '';
-        const id = 'no1';
+    it('runs setVoteId', async () => {
+      const voteId = 'no1';
+      await store.dispatch(sendVoteId(voteId));
 
-        await store.dispatch(setSingleVote(id, voteId));
+      const actions = store.getActions();
 
-        const actions = store.getActions();
-
-        expect(actions[0]).toEqual(setVoteCount(id));
-      });
-    });
-
-    context('with voteId', () => {
-      it('runs setSingleVote', async () => {
-        const voteId = 'no1';
-        const id = 'no2';
-
-        await store.dispatch(setSingleVote(id, voteId));
-
-        const actions = store.getActions();
-
-        expect(actions[0]).toEqual(resetVoteCount(voteId));
-        expect(actions[1]).toEqual(setVoteCount(id));
-      });
-    });
-
-    context('same id and voteId', () => {
-      it('runs setSingleVote', async () => {
-        const id = 'no1';
-        const voteId = 'no1';
-
-        await store.dispatch(setSingleVote(id, voteId));
-
-        const actions = store.getActions();
-
-        expect(actions[0]).toEqual(resetVoteCount(voteId));
-      });
+      expect(actions[0]).toEqual(setVoteId(voteId));
     });
   });
 });

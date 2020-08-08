@@ -5,9 +5,9 @@ import { render } from '@testing-library/react';
 import VoteList from './VoteList';
 
 describe('VoteList', () => {
-  context('with restaurant items', () => {
-    it('renders restaurant items', () => {
-      const restaurantItems = [
+  context('with vote list', () => {
+    it('renders vote list', () => {
+      const voteList = [
         { id: 'no1', name: '국수나무', count: 0 },
         { id: 'no2', name: '요기맘', count: 0 },
         { id: 'no3', name: '구내식당', count: 0 },
@@ -15,7 +15,7 @@ describe('VoteList', () => {
         { id: 'no5', name: '태양식당', count: 0 },
       ];
 
-      const { container } = render((<VoteList restaurantItems={restaurantItems} />));
+      const { container } = render((<VoteList voteList={voteList} />));
 
       expect(container).toHaveTextContent('국수나무0');
       expect(container).toHaveTextContent('요기맘0');
@@ -25,10 +25,10 @@ describe('VoteList', () => {
     });
   });
 
-  context('without restaurant items', () => {
+  context('without vote list', () => {
     it('renders no items message', () => {
-      [[], null, undefined].forEach((restaurantItems) => {
-        const { container } = render((<VoteList restaurantItems={restaurantItems} />));
+      [[], null, undefined].forEach((voteList) => {
+        const { container } = render((<VoteList voteList={voteList} />));
 
         expect(container).toHaveTextContent('투표할 식당이 없어요! 식당을 추가해주세요~');
       });

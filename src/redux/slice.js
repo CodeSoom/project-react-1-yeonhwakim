@@ -1,45 +1,51 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import {
-  fetchRestaurants,
+  fetchVoteList,
+  fetchUsers,
   fetchUser,
+  updateVoteId,
 } from '../services/api';
 
 const initialState = {
-  restaurants: [],
+  voteList: [],
   voteId: '',
+  userId: '',
 };
 const reducers = {
-  setRestaurants(state, { payload: restaurants }) {
+  setVoteList(state, { payload: voteList }) {
     return {
       ...state,
-      restaurants,
+      voteList,
     };
   },
-  setVoteCount(state, { payload: id }) {
-    const newRestaurants = [...state.restaurants];
-    const restaurantIndex = newRestaurants.findIndex((restaurant) => restaurant.id === id);
-    newRestaurants[restaurantIndex] = {
-      ...newRestaurants[restaurantIndex], count: newRestaurants[restaurantIndex].count + 1,
-    };
+
+  setCounts(state, { payload: users }) {
+    const countsObj = {};
+    users.forEach((count) => {
+      countsObj[count.voteId] = countsObj[count.voteId] === undefined
+        ? 1
+        : countsObj[count.voteId] + 1;
+    });
+
     return {
       ...state,
-      voteId: id,
-      restaurants: newRestaurants,
+      voteList: state.voteList.map((voteItem) => (
+        {
+          ...voteItem,
+          count: countsObj[voteItem.id] || 0,
+        }
+      )),
     };
   },
-  resetVoteCount(state, { payload: id }) {
-    const newRestaurants = [...state.restaurants];
-    const restaurantIndex = newRestaurants.findIndex((restaurant) => restaurant.id === id);
-    newRestaurants[restaurantIndex] = {
-      ...newRestaurants[restaurantIndex], count: newRestaurants[restaurantIndex].count - 1,
-    };
+
+  setUserId(state, { payload: id }) {
     return {
       ...state,
-      voteId: '',
-      restaurants: newRestaurants,
+      userId: id,
     };
   },
+
   setVoteId(state, { payload: id }) {
     return {
       ...state,
@@ -55,36 +61,49 @@ const { actions, reducer } = createSlice({
 });
 
 export const {
-  setRestaurants,
+  setVoteList,
+  setCounts,
+  setUserId,
   setVoteCount,
   resetVoteCount,
   setVoteId,
 } = actions;
 
-export function loadRestaurants() {
+export function loadVoteList() {
   return async (dispatch) => {
-    const restaurants = await fetchRestaurants();
+    const voteList = await fetchVoteList();
+    const users = await fetchUsers();
 
-    dispatch(setRestaurants(restaurants));
+    await dispatch(setVoteList(voteList));
+    await dispatch(setCounts(users));
+  };
+}
+
+export function loadUsers() {
+  return async (dispatch) => {
+    const users = await fetchUsers();
+
+    dispatch(setCounts(users));
   };
 }
 
 export function loadUser(userId) {
   return async (dispatch) => {
     const user = await fetchUser(userId);
-    dispatch(setVoteId(user.voteId));
+
+    await dispatch(setUserId(user.id));
+    await dispatch(setVoteId(user.voteId));
   };
 }
 
-export function setSingleVote(id, voteId) {
-  return (dispatch) => {
-    if (voteId) {
-      dispatch(resetVoteCount(voteId));
-    }
+export function sendVoteId(newId) {
+  return async (dispatch, getState) => {
+    const { userId, voteId } = getState();
+    const id = voteId === newId ? '' : newId;
 
-    if (voteId !== id) {
-      dispatch(setVoteCount(id));
-    }
+    await updateVoteId({ userId, voteId: id });
+
+    await dispatch(setVoteId(id));
   };
 }
 

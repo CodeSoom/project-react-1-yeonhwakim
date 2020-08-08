@@ -1,9 +1,12 @@
 import {
-  fetchRestaurants,
+  fetchVoteList,
+  fetchUsers,
   fetchUser,
+  updateVoteId,
 } from './api';
 
-import RESTAURANTS from '../../fixtures/restaurants';
+import VoteList from '../../fixtures/voteLsit';
+import USERS from '../../fixtures/users';
 import USER from '../../fixtures/user';
 
 describe('api', () => {
@@ -13,15 +16,27 @@ describe('api', () => {
     });
   };
 
-  describe('fetchRestaurants', () => {
+  describe('fetchVoteList', () => {
     beforeEach(() => {
-      mockFetch(RESTAURANTS);
+      mockFetch(VoteList);
     });
 
-    it('returns restaurants', async () => {
-      const restaurants = await fetchRestaurants();
+    it('returns voteList', async () => {
+      const voteList = await fetchVoteList();
 
-      expect(restaurants).toEqual(RESTAURANTS);
+      expect(voteList).toEqual(VoteList);
+    });
+  });
+
+  describe('fetchUsers', () => {
+    beforeEach(() => {
+      mockFetch(USERS);
+    });
+
+    it('returns users', async () => {
+      const users = await fetchUsers();
+
+      expect(users).toEqual(USERS);
     });
   });
 
@@ -30,11 +45,21 @@ describe('api', () => {
       mockFetch(USER);
     });
 
-    it('returns restaurants', async () => {
+    it('returns user', async () => {
       const userId = 'no1';
       const user = await fetchUser(userId);
 
       expect(user).toEqual(USER);
+    });
+  });
+
+  describe('updateVoteId', () => {
+    it('updates vote id', async () => {
+      const userId = 'user1';
+      const voteId = 'no1';
+      const result = await updateVoteId({ userId, voteId });
+
+      expect(result).toBeUndefined();
     });
   });
 });

@@ -20,7 +20,7 @@ describe('App', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
-      restaurants: [],
+      voteList: [],
     }));
   });
 
@@ -31,7 +31,7 @@ describe('App', () => {
     expect(container).toHaveTextContent('Vote for lunch!!!');
   });
 
-  it('loads restaurants list', () => {
+  it('loads vote list', () => {
     render((
       <App />
     ));
