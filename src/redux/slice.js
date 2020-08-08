@@ -90,8 +90,10 @@ export const {
 export function loadRestaurants() {
   return async (dispatch) => {
     const restaurants = await fetchRestaurants();
+    const users = await fetchUsers();
 
-    dispatch(setRestaurants(restaurants));
+    await dispatch(setRestaurants(restaurants));
+    await dispatch(setCounts(users));
   };
 }
 

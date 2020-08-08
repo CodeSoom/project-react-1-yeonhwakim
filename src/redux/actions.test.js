@@ -14,6 +14,7 @@ import {
   resetVoteCount,
 } from './slice';
 
+import APIRESTAURANTS from '../../fixtures/apiRestaurants';
 import USERS from '../../fixtures/users';
 import USER from '../../fixtures/user';
 
@@ -35,7 +36,8 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setRestaurants([]));
+      expect(actions[0]).toEqual(setRestaurants(APIRESTAURANTS));
+      expect(actions[1]).toEqual(setCounts(USERS));
     });
   });
 
