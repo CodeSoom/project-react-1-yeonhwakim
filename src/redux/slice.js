@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchUsers,
   fetchUser,
+  updateVoteId,
 } from '../services/api';
 
 const initialState = {
@@ -120,6 +121,16 @@ export function loadUser(userId) {
 
     await dispatch(setUserId(user.id));
     await dispatch(setVoteId(user.voteId));
+  };
+}
+
+export function sendVoteId(voteId) {
+  return async (dispatch, getState) => {
+    const { userId } = getState();
+
+    await updateVoteId({ userId, voteId });
+
+    await dispatch(setVoteId(voteId));
   };
 }
 

@@ -6,6 +6,7 @@ import {
   loadRestaurants,
   loadUsers,
   loadUser,
+  sendVoteId,
   setRestaurants,
   setCounts,
   setUserId,
@@ -69,6 +70,21 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setUserId(USER.id));
       expect(actions[1]).toEqual(setVoteId(USER.voteId));
+    });
+  });
+
+  describe('sendVoteId', () => {
+    beforeEach(() => {
+      store = mockStore({});
+    });
+
+    it('runs setVoteId', async () => {
+      const voteId = 'no1';
+      await store.dispatch(sendVoteId(voteId));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setVoteId(voteId));
     });
   });
 

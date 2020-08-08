@@ -13,3 +13,7 @@ export function fetchUsers() {
 export function fetchUser(userId) {
   return { id: userId, voteId: USER.voteId };
 }
+
+export function updateVoteId() {
+  return null;
+}
