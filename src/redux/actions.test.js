@@ -4,14 +4,17 @@ import configureStore from 'redux-mock-store';
 
 import {
   loadRestaurants,
+  loadUsers,
   loadUser,
   setRestaurants,
+  setCounts,
   setSingleVote,
   setVoteCount,
   setVoteId,
   resetVoteCount,
 } from './slice';
 
+import USERS from '../../fixtures/users';
 import USER from '../../fixtures/user';
 
 const middlewares = [thunk];
@@ -33,6 +36,20 @@ describe('actions', () => {
       const actions = store.getActions();
 
       expect(actions[0]).toEqual(setRestaurants([]));
+    });
+  });
+
+  describe('loadUsers', () => {
+    beforeEach(() => {
+      store = mockStore({});
+    });
+
+    it('runs loadUsers', async () => {
+      await store.dispatch(loadUsers());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setCounts(USERS));
     });
   });
 

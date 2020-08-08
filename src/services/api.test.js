@@ -35,9 +35,9 @@ describe('api', () => {
     });
 
     it('returns users', async () => {
-      const user = await fetchUsers();
+      const users = await fetchUsers();
 
-      expect(user).toEqual(USERS);
+      expect(users).toEqual(USERS);
     });
   });
 
