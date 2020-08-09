@@ -36,6 +36,8 @@ describe('VoteContainer', () => {
     it('renders voteList', () => {
       const { container } = rednerVoteContainer();
 
+      expect(dispatch).toBeCalledTimes(1);
+
       VOTELIST.forEach(({ name, count }) => (
         expect(container).toHaveTextContent(`${name}${count}`)
       ));
