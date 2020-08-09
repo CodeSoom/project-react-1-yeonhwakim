@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import VoteContainer from './VoteContainer';
 
+import VOTELIST from '../fixtures/voteList';
+
 jest.mock('react-redux');
 
 describe('VoteContainer', () => {
@@ -13,7 +15,9 @@ describe('VoteContainer', () => {
 
   beforeEach(() => {
     dispatch.mockClear();
+
     useDispatch.mockImplementation(() => dispatch);
+
     useSelector.mockImplementation((selector) => selector({
       voteList: given.voteList,
       voteId: given.voteId,
@@ -21,13 +25,7 @@ describe('VoteContainer', () => {
   });
 
   context('with voteList', () => {
-    given('voteList', () => ([
-      { id: 'no1', name: '국수나무', count: 0 },
-      { id: 'no2', name: '요기맘', count: 0 },
-      { id: 'no3', name: '구내식당', count: 0 },
-      { id: 'no4', name: '돈푸대', count: 0 },
-      { id: 'no5', name: '태양식당', count: 0 },
-    ]));
+    given('voteList', () => (VOTELIST));
 
     given('voteId', () => '');
 
@@ -38,11 +36,9 @@ describe('VoteContainer', () => {
     it('renders voteList', () => {
       const { container } = rednerVoteContainer();
 
-      expect(container).toHaveTextContent('국수나무0');
-      expect(container).toHaveTextContent('요기맘0');
-      expect(container).toHaveTextContent('구내식당0');
-      expect(container).toHaveTextContent('돈푸대0');
-      expect(container).toHaveTextContent('태양식당0');
+      VOTELIST.forEach(({ name, count }) => (
+        expect(container).toHaveTextContent(`${name}${count}`)
+      ));
     });
 
     it('listens click event', () => {

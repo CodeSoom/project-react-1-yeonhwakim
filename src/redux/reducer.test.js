@@ -5,7 +5,7 @@ import reducer, {
   setVoteId,
 } from './slice';
 
-import VOTELIST from '../../fixtures/voteLsit';
+import VOTELIST from '../../fixtures/voteList';
 import USERS from '../../fixtures/users';
 import USER from '../../fixtures/user';
 

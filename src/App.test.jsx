@@ -31,13 +31,6 @@ describe('App', () => {
     expect(container).toHaveTextContent('Vote for lunch!!!');
   });
 
-  it('loads vote list', () => {
-    render((
-      <App />
-    ));
-    expect(dispatch).toBeCalled();
-  });
-
   context('without local storage token', () => {
     const accessToken = 'user1';
 

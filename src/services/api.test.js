@@ -5,7 +5,7 @@ import {
   updateVoteId,
 } from './api';
 
-import VoteList from '../../fixtures/voteLsit';
+import VoteList from '../../fixtures/voteList';
 import USERS from '../../fixtures/users';
 import USER from '../../fixtures/user';
 
