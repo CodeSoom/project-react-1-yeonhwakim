@@ -18,6 +18,12 @@ npm run lint
 npm run test:unit
 ```
 
+## Run api
+
+```bash
+npm run api
+```
+
 ## Run web server
 
 
