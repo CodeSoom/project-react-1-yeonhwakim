@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { MemoryRouter } from 'react-router-dom';
+
 import { render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,11 +26,28 @@ describe('App', () => {
     }));
   });
 
-  it('redners vote header', () => {
-    const { container } = render((
-      <App />
+  function renderApp({ path }) {
+    return render((
+      <MemoryRouter initialEntries={[path]}>
+        <App />
+      </MemoryRouter>
     ));
-    expect(container).toHaveTextContent('Vote for lunch!!!');
+  }
+
+  context('with path /', () => {
+    it('default path renders vote page', () => {
+      const { container } = renderApp({ path: '/' });
+
+      expect(container).toHaveTextContent('Vote for lunch!!!');
+    });
+  });
+
+  context('with path /vote', () => {
+    it('renders the vote page', () => {
+      const { container } = renderApp({ path: '/vote' });
+
+      expect(container).toHaveTextContent('Vote for lunch!!!');
+    });
   });
 
   context('without local storage token', () => {
@@ -39,10 +58,10 @@ describe('App', () => {
     });
 
     it('save token', () => {
-      render((
-        <App />
-      ));
+      renderApp({ path: '/' });
+
       saveItem.mockImplementation(() => accessToken);
+
       expect(saveItem('accessToken')).toBe(accessToken);
     });
   });
@@ -55,9 +74,8 @@ describe('App', () => {
     });
 
     it('loadUser', () => {
-      render((
-        <App />
-      ));
+      renderApp({ path: '/' });
+
       expect(dispatch).toBeCalledTimes(2);
     });
   });
