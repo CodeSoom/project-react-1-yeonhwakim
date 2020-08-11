@@ -1,0 +1,110 @@
+import { createSlice } from '@reduxjs/toolkit';
+
+import {
+  fetchVoteList,
+  fetchUsers,
+  fetchUser,
+  updateVoteId,
+} from '../services/api';
+
+const initialState = {
+  voteList: [],
+  voteId: '',
+  userId: '',
+};
+const reducers = {
+  setVoteList(state, { payload: voteList }) {
+    return {
+      ...state,
+      voteList,
+    };
+  },
+
+  setCounts(state, { payload: users }) {
+    const countsObj = {};
+    users.forEach((count) => {
+      countsObj[count.voteId] = countsObj[count.voteId] === undefined
+        ? 1
+        : countsObj[count.voteId] + 1;
+    });
+
+    return {
+      ...state,
+      voteList: state.voteList.map((voteItem) => (
+        {
+          ...voteItem,
+          count: countsObj[voteItem.id] || 0,
+        }
+      )),
+    };
+  },
+
+  setUserId(state, { payload: id }) {
+    return {
+      ...state,
+      userId: id,
+    };
+  },
+
+  setVoteId(state, { payload: id }) {
+    return {
+      ...state,
+      voteId: id,
+    };
+  },
+};
+
+const { actions, reducer } = createSlice({
+  name: 'application',
+  initialState,
+  reducers,
+});
+
+export const {
+  setVoteList,
+  setCounts,
+  setUserId,
+  setVoteCount,
+  resetVoteCount,
+  setVoteId,
+} = actions;
+
+export function loadVoteList() {
+  return async (dispatch) => {
+    const voteList = await fetchVoteList();
+    const users = await fetchUsers();
+
+    await dispatch(setVoteList(voteList));
+    await dispatch(setCounts(users));
+  };
+}
+
+export function loadUsers() {
+  return async (dispatch) => {
+    const users = await fetchUsers();
+
+    dispatch(setCounts(users));
+  };
+}
+
+export function loadUser(userId) {
+  return async (dispatch) => {
+    const user = await fetchUser(userId);
+
+    await dispatch(setUserId(user.id));
+    await dispatch(setVoteId(user.voteId));
+  };
+}
+
+export function sendVoteId(newId) {
+  return async (dispatch, getState) => {
+    const { userId, voteId } = getState();
+    const id = voteId === newId ? '' : newId;
+
+    await updateVoteId({ userId, voteId: id });
+
+    await dispatch(setVoteId(id));
+  };
+}
+
+export default reducer;
