@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import VoteContainer from './VoteContainer';
 
-import VOTELIST from '../fixtures/voteList';
+import VOTELIST from '../../fixtures/voteList';
 
 jest.mock('react-redux');
 

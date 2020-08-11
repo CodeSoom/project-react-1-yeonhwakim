@@ -5,11 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   loadVoteList,
   sendVoteId,
-} from './redux/slice';
+} from '../redux/slice';
 
-import { get } from './utils/utils';
+import { get } from '../utils/utils';
 
-import VoteList from './VoteList';
+import VoteList from '../components/VoteList';
 
 export default function VoteContainer() {
   const dispatch = useDispatch();
