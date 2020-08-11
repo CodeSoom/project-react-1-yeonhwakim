@@ -74,8 +74,8 @@ export function loadVoteList() {
     const voteList = await fetchVoteList();
     const users = await fetchUsers();
 
-    await dispatch(setVoteList(voteList));
-    await dispatch(setCounts(users));
+    dispatch(setVoteList(voteList));
+    dispatch(setCounts(users));
   };
 }
 
@@ -91,8 +91,8 @@ export function loadUser(userId) {
   return async (dispatch) => {
     const user = await fetchUser(userId);
 
-    await dispatch(setUserId(user.id));
-    await dispatch(setVoteId(user.voteId));
+    dispatch(setUserId(user.id));
+    dispatch(setVoteId(user.voteId));
   };
 }
 
@@ -103,7 +103,7 @@ export function sendVoteId(newId) {
 
     await updateVoteId({ userId, voteId: id });
 
-    await dispatch(setVoteId(id));
+    dispatch(setVoteId(id));
   };
 }
 
