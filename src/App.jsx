@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 
 import TabPage from './pages/TabPage';
 import VotePage from './pages/VotePage';
+import MenuPage from './pages/MenuPage';
 
 import {
   loadUser,
@@ -34,6 +35,7 @@ export default function App() {
       <Switch>
         <Route exact path="/" component={VotePage} />
         <Route path="/vote" component={VotePage} />
+        <Route path="/menu" component={MenuPage} />
       </Switch>
     </>
   );

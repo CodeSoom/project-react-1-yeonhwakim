@@ -50,6 +50,14 @@ describe('App', () => {
     });
   });
 
+  context('with path /menu', () => {
+    it('renders the menu page', () => {
+      const { container } = renderApp({ path: '/menu' });
+
+      expect(container).toHaveTextContent('Menu!!!!');
+    });
+  });
+
   context('without local storage token', () => {
     const accessToken = 'user1';
 
