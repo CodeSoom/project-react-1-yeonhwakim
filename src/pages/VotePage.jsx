@@ -1,6 +1,6 @@
 import React from 'react';
 
-import VoteContainer from './VoteContainer';
+import VoteContainer from '../containers/VoteContainer';
 
 export default function VotePage() {
   return (
