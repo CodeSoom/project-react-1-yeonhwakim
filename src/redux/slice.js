@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import {
   fetchVoteList,
+  fetchMenuList,
   fetchUsers,
   fetchUser,
   updateVoteId,
@@ -85,6 +86,14 @@ export function loadVoteList() {
 
     dispatch(setVoteList(voteList));
     dispatch(setCounts(users));
+  };
+}
+
+export function loadMenuList() {
+  return async (dispatch) => {
+    const menuList = await fetchMenuList();
+
+    dispatch(setMenuList(menuList));
   };
 }
 
