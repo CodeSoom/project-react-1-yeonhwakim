@@ -9,6 +9,7 @@ import {
 
 const initialState = {
   voteList: [],
+  menuList: [],
   voteId: '',
   userId: '',
 };
@@ -17,6 +18,13 @@ const reducers = {
     return {
       ...state,
       voteList,
+    };
+  },
+
+  setMenuList(state, { payload: menuList }) {
+    return {
+      ...state,
+      menuList,
     };
   },
 
@@ -62,6 +70,7 @@ const { actions, reducer } = createSlice({
 
 export const {
   setVoteList,
+  setMenuList,
   setCounts,
   setUserId,
   setVoteCount,
