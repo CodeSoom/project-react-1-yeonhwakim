@@ -1,11 +1,13 @@
 import {
   fetchVoteList,
+  fetchMenuList,
   fetchUsers,
   fetchUser,
   updateVoteId,
 } from './api';
 
-import VoteList from '../../fixtures/voteList';
+import VOTELIST from '../../fixtures/voteList';
+import MENULIST from '../../fixtures/menuList';
 import USERS from '../../fixtures/users';
 import USER from '../../fixtures/user';
 
@@ -18,13 +20,25 @@ describe('api', () => {
 
   describe('fetchVoteList', () => {
     beforeEach(() => {
-      mockFetch(VoteList);
+      mockFetch(VOTELIST);
     });
 
     it('returns voteList', async () => {
       const voteList = await fetchVoteList();
 
-      expect(voteList).toEqual(VoteList);
+      expect(voteList).toEqual(VOTELIST);
+    });
+  });
+
+  describe('fetchMenuList', () => {
+    beforeEach(() => {
+      mockFetch(MENULIST);
+    });
+
+    it('returns menuList', async () => {
+      const menuList = await fetchMenuList();
+
+      expect(menuList).toEqual(MENULIST);
     });
   });
 
