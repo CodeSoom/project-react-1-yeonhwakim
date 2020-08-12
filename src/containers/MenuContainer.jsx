@@ -8,6 +8,8 @@ import {
 
 import { get } from '../utils/utils';
 
+import MenuList from '../components/MenuList';
+
 export default function MenuContainer() {
   const dispatch = useDispatch();
 
@@ -19,13 +21,7 @@ export default function MenuContainer() {
 
   return (
     <>
-      <ul>
-        {
-          menuList.map((menuItem) => (
-            <li key={menuItem.id}>{menuItem.name}</li>
-          ))
-        }
-      </ul>
+      <MenuList menuList={menuList} />
     </>
   );
 }
