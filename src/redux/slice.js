@@ -13,6 +13,7 @@ const initialState = {
   menuList: [],
   voteId: '',
   userId: '',
+  newMenu: '',
 };
 const reducers = {
   setVoteList(state, { payload: voteList }) {

@@ -18,6 +18,7 @@ describe('reducer', () => {
       menuList: [],
       voteId: '',
       userId: '',
+      newMenu: '',
     };
 
     it('returns initialState', () => {
