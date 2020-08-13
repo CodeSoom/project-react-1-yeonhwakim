@@ -6,9 +6,11 @@ import MenuForm from './MenuForm';
 
 describe('MenuForm', () => {
   const handleChange = jest.fn();
+  const handleSubmit = jest.fn();
 
   beforeEach(() => {
     handleChange.mockClear();
+    handleSubmit.mockClear();
   });
 
   function renderMenuForm(newMenu) {
@@ -16,6 +18,7 @@ describe('MenuForm', () => {
       <MenuForm
         field={newMenu}
         onChange={handleChange}
+        onSubmit={handleSubmit}
       />
     ));
   }
@@ -43,5 +46,13 @@ describe('MenuForm', () => {
     fireEvent.change(input, { target: { value } });
 
     expect(handleChange).toBeCalledWith({ value });
+  });
+
+  it('renders “추가” button', () => {
+    const { getByText } = renderMenuForm();
+
+    fireEvent.click(getByText('추가'));
+
+    expect(handleSubmit).toBeCalled();
   });
 });

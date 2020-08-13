@@ -1,9 +1,14 @@
 import React from 'react';
 
-export default function MenuForm({ field, onChange }) {
+export default function MenuForm({ field, onChange, onSubmit }) {
   function handleChange(event) {
     const { target: { value } } = event;
     onChange({ value });
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    onSubmit();
   }
 
   return (
@@ -15,7 +20,12 @@ export default function MenuForm({ field, onChange }) {
           value={field}
           onChange={handleChange}
         />
-        <button type="submit">추가</button>
+        <button
+          type="submit"
+          onClick={handleSubmit}
+        >
+          추가
+        </button>
       </form>
     </>
   );
