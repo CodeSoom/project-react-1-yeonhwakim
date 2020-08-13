@@ -8,6 +8,7 @@ import {
 
 import { get } from '../utils/utils';
 
+import MenuForm from '../components/MenuForm';
 import MenuList from '../components/MenuList';
 
 export default function MenuContainer() {
@@ -17,10 +18,14 @@ export default function MenuContainer() {
     dispatch(loadMenuList());
   }, []);
 
+  const newMenu = useSelector(get('newMenu'));
   const menuList = useSelector(get('menuList'));
 
   return (
     <>
+      <MenuForm
+        field={newMenu}
+      />
       <MenuList menuList={menuList} />
     </>
   );

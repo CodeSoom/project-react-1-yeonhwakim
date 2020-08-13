@@ -20,20 +20,31 @@ describe('MenuContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       menuList: given.menuList,
+      newMenu: given.newMenu,
     }));
   });
 
-  given('menuList', () => (MENULIST));
-
-  it('renders menuList', () => {
-    const { container } = render((
+  function renderMenuContainer() {
+    return render((
       <MenuContainer />
     ));
+  }
+  given('menuList', () => (MENULIST));
+  given('newMenu', () => ('김밥천국'));
 
+  it('renders menuList', () => {
+    const { container } = renderMenuContainer();
     expect(dispatch).toBeCalledTimes(1);
 
     MENULIST.forEach(({ name }) => (
       expect(container).toHaveTextContent(`${name}`)
     ));
+  });
+
+  it('renders menuForm', () => {
+    const { container, getByDisplayValue } = renderMenuContainer();
+
+    expect(container).toHaveTextContent('추가');
+    expect(getByDisplayValue('김밥천국')).toBeTruthy();
   });
 });
