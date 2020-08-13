@@ -137,8 +137,10 @@ export function sendVoteId(newId) {
 
 export function sendNewMenu() {
   return async (dispatch, getState) => {
-    const { menuList, newMenu } = getState();
-    const id = `no${menuList.length}`;
+    const { newMenu } = getState();
+    const id = `no${Math.floor(Math.random() * 10000)}`;
+
+    if (!newMenu) return;
 
     await addMenu({ id, name: newMenu });
 
