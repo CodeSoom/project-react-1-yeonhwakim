@@ -50,6 +50,14 @@ describe('MenuContainer', () => {
       expect(container).toHaveTextContent('추가');
       expect(getByDisplayValue('김밥천국')).toBeTruthy();
     });
+
+    it('listens click events', () => {
+      const { getByText } = renderMenuContainer();
+
+      fireEvent.click(getByText('추가'));
+
+      expect(dispatch).toBeCalledTimes(3);
+    });
   });
 
   context('without given newMenu', () => {

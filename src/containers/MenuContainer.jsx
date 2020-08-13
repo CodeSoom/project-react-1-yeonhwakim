@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   loadMenuList,
   setNewMenu,
+  sendNewMenu,
 } from '../redux/slice';
 
 import { get } from '../utils/utils';
@@ -26,11 +27,17 @@ export default function MenuContainer() {
     dispatch(setNewMenu(value));
   };
 
+  const handleSubmit = () => {
+    dispatch(sendNewMenu());
+    dispatch(loadMenuList());
+  };
+
   return (
     <>
       <MenuForm
         field={newMenu}
         onChange={handleChange}
+        onSubmit={handleSubmit}
       />
       <MenuList menuList={menuList} />
     </>
