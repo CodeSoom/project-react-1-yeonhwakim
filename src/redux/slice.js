@@ -6,6 +6,7 @@ import {
   fetchUsers,
   fetchUser,
   updateVoteId,
+  addMenu,
 } from '../services/api';
 
 const initialState = {
@@ -131,6 +132,17 @@ export function sendVoteId(newId) {
     await updateVoteId({ userId, voteId: id });
 
     dispatch(setVoteId(id));
+  };
+}
+
+export function sendNewMenu() {
+  return async (dispatch, getState) => {
+    const { menuList, newMenu } = getState();
+    const id = `no${menuList.length}`;
+
+    await addMenu({ id, name: newMenu });
+
+    dispatch(setNewMenu(''));
   };
 }
 
