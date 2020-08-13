@@ -62,6 +62,13 @@ const reducers = {
       voteId: id,
     };
   },
+
+  setNewMenu(state, { payload: newMenu }) {
+    return {
+      ...state,
+      newMenu,
+    };
+  },
 };
 
 const { actions, reducer } = createSlice({
@@ -78,6 +85,7 @@ export const {
   setVoteCount,
   resetVoteCount,
   setVoteId,
+  setNewMenu,
 } = actions;
 
 export function loadVoteList() {
