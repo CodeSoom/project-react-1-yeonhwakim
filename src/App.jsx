@@ -1,8 +1,15 @@
 import React, { useEffect } from 'react';
 
+import {
+  Switch,
+  Route,
+} from 'react-router-dom';
+
 import { useDispatch } from 'react-redux';
 
-import VotePage from './VotePage';
+import TabPage from './pages/TabPage';
+import VotePage from './pages/VotePage';
+import MenuPage from './pages/MenuPage';
 
 import {
   loadUser,
@@ -23,6 +30,13 @@ export default function App() {
   }, []);
 
   return (
-    <VotePage />
+    <>
+      <TabPage />
+      <Switch>
+        <Route exact path="/" component={VotePage} />
+        <Route path="/vote" component={VotePage} />
+        <Route path="/menu" component={MenuPage} />
+      </Switch>
+    </>
   );
 }
