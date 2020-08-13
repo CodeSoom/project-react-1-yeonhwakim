@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import {
   fetchVoteList,
+  fetchMenuList,
   fetchUsers,
   fetchUser,
   updateVoteId,
@@ -9,6 +10,7 @@ import {
 
 const initialState = {
   voteList: [],
+  menuList: [],
   voteId: '',
   userId: '',
 };
@@ -17,6 +19,13 @@ const reducers = {
     return {
       ...state,
       voteList,
+    };
+  },
+
+  setMenuList(state, { payload: menuList }) {
+    return {
+      ...state,
+      menuList,
     };
   },
 
@@ -62,6 +71,7 @@ const { actions, reducer } = createSlice({
 
 export const {
   setVoteList,
+  setMenuList,
   setCounts,
   setUserId,
   setVoteCount,
@@ -76,6 +86,14 @@ export function loadVoteList() {
 
     dispatch(setVoteList(voteList));
     dispatch(setCounts(users));
+  };
+}
+
+export function loadMenuList() {
+  return async (dispatch) => {
+    const menuList = await fetchMenuList();
+
+    dispatch(setMenuList(menuList));
   };
 }
 

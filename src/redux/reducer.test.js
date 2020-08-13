@@ -1,11 +1,13 @@
 import reducer, {
   setVoteList,
+  setMenuList,
   setCounts,
   setUserId,
   setVoteId,
 } from './slice';
 
 import VOTELIST from '../../fixtures/voteList';
+import MENULIST from '../../fixtures/menuList';
 import USERS from '../../fixtures/users';
 import USER from '../../fixtures/user';
 
@@ -13,6 +15,7 @@ describe('reducer', () => {
   context('when previous state is undefined', () => {
     const initialState = {
       voteList: [],
+      menuList: [],
       voteId: '',
       userId: '',
     };
@@ -33,6 +36,18 @@ describe('reducer', () => {
       const state = reducer(initialState, setVoteList(VOTELIST));
 
       expect(state.voteList).toHaveLength(5);
+    });
+  });
+
+  describe('setMenuList', () => {
+    it('changes menuList', () => {
+      const initialState = {
+        menuList: [],
+      };
+
+      const state = reducer(initialState, setMenuList(MENULIST));
+
+      expect(state.menuList).toHaveLength(5);
     });
   });
 

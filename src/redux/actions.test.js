@@ -4,16 +4,19 @@ import configureStore from 'redux-mock-store';
 
 import {
   loadVoteList,
+  loadMenuList,
   loadUsers,
   loadUser,
   sendVoteId,
   setVoteList,
+  setMenuList,
   setCounts,
   setUserId,
   setVoteId,
 } from './slice';
 
 import APIVOTELIST from '../../fixtures/apiVoteList';
+import MENULIST from '../../fixtures/menuList';
 import USERS from '../../fixtures/users';
 import USER from '../../fixtures/user';
 
@@ -37,6 +40,20 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setVoteList(APIVOTELIST));
       expect(actions[1]).toEqual(setCounts(USERS));
+    });
+  });
+
+  describe('loadMenuList', () => {
+    beforeEach(() => {
+      store = mockStore([]);
+    });
+
+    it('runs setMenuList', async () => {
+      await store.dispatch(loadMenuList());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setMenuList(MENULIST));
     });
   });
 
