@@ -4,6 +4,7 @@ import {
   fetchUsers,
   fetchUser,
   updateVoteId,
+  addMenu,
 } from './api';
 
 import VOTELIST from '../../fixtures/voteList';
@@ -72,6 +73,16 @@ describe('api', () => {
       const userId = 'user1';
       const voteId = 'no1';
       const result = await updateVoteId({ userId, voteId });
+
+      expect(result).toBeUndefined();
+    });
+  });
+
+  describe('addMenu', () => {
+    it('add menu', async () => {
+      const id = 'no6';
+      const name = '김밥천국';
+      const result = await addMenu({ id, name });
 
       expect(result).toBeUndefined();
     });
