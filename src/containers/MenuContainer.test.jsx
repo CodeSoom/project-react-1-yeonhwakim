@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -13,6 +13,12 @@ jest.mock('react-redux');
 describe('MenuContainer', () => {
   const dispatch = jest.fn();
 
+  function renderMenuContainer() {
+    return render((
+      <MenuContainer />
+    ));
+  }
+
   beforeEach(() => {
     dispatch.mockClear();
 
@@ -24,13 +30,7 @@ describe('MenuContainer', () => {
     }));
   });
 
-  function renderMenuContainer() {
-    return render((
-      <MenuContainer />
-    ));
-  }
   given('menuList', () => (MENULIST));
-  given('newMenu', () => ('김밥천국'));
 
   it('renders menuList', () => {
     const { container } = renderMenuContainer();
@@ -41,10 +41,35 @@ describe('MenuContainer', () => {
     ));
   });
 
-  it('renders menuForm', () => {
-    const { container, getByDisplayValue } = renderMenuContainer();
+  context('with given newMenu', () => {
+    given('newMenu', () => ('김밥천국'));
 
-    expect(container).toHaveTextContent('추가');
-    expect(getByDisplayValue('김밥천국')).toBeTruthy();
+    it('renders menuForm', () => {
+      const { container, getByDisplayValue } = renderMenuContainer();
+
+      expect(container).toHaveTextContent('추가');
+      expect(getByDisplayValue('김밥천국')).toBeTruthy();
+    });
+  });
+
+  context('without given newMenu', () => {
+    given('newMenu', () => (''));
+
+    it('listens change events', () => {
+      const { getByPlaceholderText } = renderMenuContainer();
+
+      const control = { placeholder: 'menu', value: '김밥천국' };
+      const { value } = control;
+
+      const input = getByPlaceholderText(control.placeholder);
+
+      fireEvent.change(input, { target: { value } });
+
+      expect(dispatch).toBeCalledTimes(2);
+      expect(dispatch).toBeCalledWith({
+        type: 'application/setNewMenu',
+        payload: value,
+      });
+    });
   });
 });

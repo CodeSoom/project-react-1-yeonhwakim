@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {
   loadMenuList,
+  setNewMenu,
 } from '../redux/slice';
 
 import { get } from '../utils/utils';
@@ -21,10 +22,15 @@ export default function MenuContainer() {
   const newMenu = useSelector(get('newMenu'));
   const menuList = useSelector(get('menuList'));
 
+  const handleChange = ({ value }) => {
+    dispatch(setNewMenu(value));
+  };
+
   return (
     <>
       <MenuForm
         field={newMenu}
+        onChange={handleChange}
       />
       <MenuList menuList={menuList} />
     </>
