@@ -26,3 +26,7 @@ export function updateVoteId() {
 export function addMenu() {
   return null;
 }
+
+export function deleteMenu() {
+  return null;
+}
