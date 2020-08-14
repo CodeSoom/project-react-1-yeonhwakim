@@ -28,7 +28,7 @@ export default function MenuContainer() {
   };
 
   const handleSubmit = () => {
-    dispatch(sendNewMenu());
+    dispatch(sendNewMenu(newMenu));
     dispatch(loadMenuList());
   };
 

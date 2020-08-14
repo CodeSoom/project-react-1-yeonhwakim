@@ -113,7 +113,7 @@ describe('actions', () => {
     });
 
     it('runs nothing', async () => {
-      await store.dispatch(sendNewMenu());
+      await store.dispatch(sendNewMenu('김밥천국'));
 
       const actions = store.getActions();
 

@@ -136,9 +136,8 @@ export function sendVoteId(newId) {
   };
 }
 
-export function sendNewMenu() {
-  return async (dispatch, getState) => {
-    const { newMenu } = getState();
+export function sendNewMenu(newMenu) {
+  return async (dispatch) => {
     const id = `no${shortid.generate()}`;
 
     if (!newMenu) {
