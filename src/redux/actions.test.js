@@ -15,6 +15,7 @@ import {
   setVoteId,
   sendNewMenu,
   setNewMenu,
+  sendDeleteMenuId,
 } from './slice';
 
 import APIVOTELIST from '../../fixtures/apiVoteList';
@@ -112,12 +113,27 @@ describe('actions', () => {
       });
     });
 
-    it('runs nothing', async () => {
+    it('runs setNewMenu', async () => {
       await store.dispatch(sendNewMenu('김밥천국'));
 
       const actions = store.getActions();
 
       expect(actions[0]).toEqual(setNewMenu(''));
+    });
+  });
+
+  describe('sendDeleteMenuId', () => {
+    beforeEach(() => {
+      store = mockStore({
+      });
+    });
+
+    it('runs nothing', async () => {
+      await store.dispatch(sendDeleteMenuId('no1'));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toBeUndefined();
     });
   });
 });
