@@ -153,7 +153,7 @@ export function sendNewMenu(newMenu) {
 
 export function sendDeleteMenuId(deleteId) {
   return async () => {
-    deleteMenu({ id: deleteId });
+    await deleteMenu(deleteId);
   };
 }
 

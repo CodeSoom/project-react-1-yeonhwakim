@@ -49,7 +49,7 @@ export async function addMenu({ id, name }) {
 }
 
 export async function deleteMenu(id) {
-  const url = `http://localhost:3000/voteList${id}`;
+  const url = `http://localhost:3000/voteList/${id}`;
   await fetch(url, {
     method: 'DELETE',
   });
