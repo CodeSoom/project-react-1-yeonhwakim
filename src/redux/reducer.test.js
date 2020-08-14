@@ -4,6 +4,7 @@ import reducer, {
   setCounts,
   setUserId,
   setVoteId,
+  setNewMenu,
 } from './slice';
 
 import VOTELIST from '../../fixtures/voteList';
@@ -18,6 +19,7 @@ describe('reducer', () => {
       menuList: [],
       voteId: '',
       userId: '',
+      newMenu: '',
     };
 
     it('returns initialState', () => {
@@ -82,6 +84,17 @@ describe('reducer', () => {
 
       const state = reducer(initialState, setVoteId('no1'));
       expect(state.voteId).toBe(USER.voteId);
+    });
+  });
+
+  describe('setNewMenu', () => {
+    it('set new menu', () => {
+      const initialState = {
+        newMenu: '',
+      };
+
+      const state = reducer(initialState, setNewMenu('김밥천국'));
+      expect(state.newMenu).toBe('김밥천국');
     });
   });
 });

@@ -22,3 +22,7 @@ export function fetchUser(userId) {
 export function updateVoteId() {
   return null;
 }
+
+export function addMenu() {
+  return null;
+}

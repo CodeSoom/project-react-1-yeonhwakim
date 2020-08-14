@@ -22,7 +22,7 @@ export default function App() {
   const accessToken = loadItem('accessToken');
 
   if (!accessToken) {
-    saveItem(accessToken, 'user1');
+    saveItem('accessToken', 'user1');
   }
 
   useEffect(() => {

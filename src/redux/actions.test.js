@@ -13,6 +13,8 @@ import {
   setCounts,
   setUserId,
   setVoteId,
+  sendNewMenu,
+  setNewMenu,
 } from './slice';
 
 import APIVOTELIST from '../../fixtures/apiVoteList';
@@ -99,6 +101,23 @@ describe('actions', () => {
       const actions = store.getActions();
 
       expect(actions[0]).toEqual(setVoteId(voteId));
+    });
+  });
+
+  describe('sendNewMenu', () => {
+    beforeEach(() => {
+      store = mockStore({
+        menuList: MENULIST,
+        newMenu: '김밥천국',
+      });
+    });
+
+    it('runs nothing', async () => {
+      await store.dispatch(sendNewMenu('김밥천국'));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setNewMenu(''));
     });
   });
 });

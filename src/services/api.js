@@ -36,3 +36,14 @@ export async function updateVoteId({ userId, voteId }) {
     body: JSON.stringify({ voteId }),
   });
 }
+
+export async function addMenu({ id, name }) {
+  const url = 'http://localhost:3000/voteList';
+  await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ id, name }),
+  });
+}

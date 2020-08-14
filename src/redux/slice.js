@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import shortid from 'shortid';
 
 import {
   fetchVoteList,
@@ -6,6 +7,7 @@ import {
   fetchUsers,
   fetchUser,
   updateVoteId,
+  addMenu,
 } from '../services/api';
 
 const initialState = {
@@ -13,6 +15,7 @@ const initialState = {
   menuList: [],
   voteId: '',
   userId: '',
+  newMenu: '',
 };
 const reducers = {
   setVoteList(state, { payload: voteList }) {
@@ -61,6 +64,13 @@ const reducers = {
       voteId: id,
     };
   },
+
+  setNewMenu(state, { payload: newMenu }) {
+    return {
+      ...state,
+      newMenu,
+    };
+  },
 };
 
 const { actions, reducer } = createSlice({
@@ -77,6 +87,7 @@ export const {
   setVoteCount,
   resetVoteCount,
   setVoteId,
+  setNewMenu,
 } = actions;
 
 export function loadVoteList() {
@@ -122,6 +133,20 @@ export function sendVoteId(newId) {
     await updateVoteId({ userId, voteId: id });
 
     dispatch(setVoteId(id));
+  };
+}
+
+export function sendNewMenu(newMenu) {
+  return async (dispatch) => {
+    const id = `no${shortid.generate()}`;
+
+    if (!newMenu) {
+      return;
+    }
+
+    await addMenu({ id, name: newMenu });
+
+    dispatch(setNewMenu(''));
   };
 }
 
