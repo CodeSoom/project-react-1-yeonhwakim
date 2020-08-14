@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import shortid from 'shortid';
 
 import {
   fetchVoteList,
@@ -138,7 +139,7 @@ export function sendVoteId(newId) {
 export function sendNewMenu() {
   return async (dispatch, getState) => {
     const { newMenu } = getState();
-    const id = `no${Math.floor(Math.random() * 10000)}`;
+    const id = `no${shortid.generate()}`;
 
     if (!newMenu) {
       return;
