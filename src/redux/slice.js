@@ -140,7 +140,9 @@ export function sendNewMenu() {
     const { newMenu } = getState();
     const id = `no${Math.floor(Math.random() * 10000)}`;
 
-    if (!newMenu) return;
+    if (!newMenu) {
+      return;
+    }
 
     await addMenu({ id, name: newMenu });
 
