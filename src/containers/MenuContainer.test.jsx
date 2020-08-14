@@ -33,12 +33,14 @@ describe('MenuContainer', () => {
   given('menuList', () => (MENULIST));
 
   it('renders menuList', () => {
-    const { container } = renderMenuContainer();
+    const { container, getAllByText } = renderMenuContainer();
     expect(dispatch).toBeCalledTimes(1);
 
     MENULIST.forEach(({ name }) => (
       expect(container).toHaveTextContent(`${name}`)
     ));
+
+    expect(getAllByText('삭제')).toBeTruthy();
   });
 
   context('with given newMenu', () => {

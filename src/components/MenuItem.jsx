@@ -5,6 +5,7 @@ export default function VoteItem({ menuItem: { name } }) {
     <>
       <li>
         {name}
+        <button type="button">삭제</button>
       </li>
     </>
   );

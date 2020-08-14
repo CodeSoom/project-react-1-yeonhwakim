@@ -13,11 +13,12 @@ describe('MenuItem', () => {
     />);
   }
 
-  it('renders menu item', () => {
+  it('renders menu item and delete button', () => {
     const menuItem = MENULIST[0];
 
     const { container } = renderMenuItem(menuItem);
 
     expect(container).toHaveTextContent('국수나무');
+    expect(container).toHaveTextContent('삭제');
   });
 });
