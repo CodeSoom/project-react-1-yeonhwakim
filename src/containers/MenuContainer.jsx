@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {
   loadMenuList,
+  sendDeleteMenuId,
   setNewMenu,
   sendNewMenu,
 } from '../redux/slice';
@@ -32,6 +33,11 @@ export default function MenuContainer() {
     dispatch(loadMenuList());
   };
 
+  const handleClickDelete = (deleteId) => {
+    dispatch(sendDeleteMenuId(deleteId));
+    dispatch(loadMenuList());
+  };
+
   return (
     <>
       <MenuForm
@@ -39,7 +45,10 @@ export default function MenuContainer() {
         onChange={handleChange}
         onSubmit={handleSubmit}
       />
-      <MenuList menuList={menuList} />
+      <MenuList
+        menuList={menuList}
+        onClick={handleClickDelete}
+      />
     </>
   );
 }
