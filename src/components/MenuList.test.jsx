@@ -11,11 +11,13 @@ describe('MenuList', () => {
     it('renders menu list', () => {
       const menuList = MENULIST;
 
-      const { container } = render((<MenuList menuList={menuList} />));
+      const { container, getAllByText } = render((<MenuList menuList={menuList} />));
 
       MENULIST.forEach(({ name }) => (
         expect(container).toHaveTextContent(`${name}`)
       ));
+
+      expect(getAllByText('삭제')).toBeTruthy();
     });
   });
 

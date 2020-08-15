@@ -30,15 +30,27 @@ describe('MenuContainer', () => {
     }));
   });
 
-  given('menuList', () => (MENULIST));
+  context('with menuList', () => {
+    given('menuList', () => (MENULIST));
 
-  it('renders menuList', () => {
-    const { container } = renderMenuContainer();
-    expect(dispatch).toBeCalledTimes(1);
+    it('renders menuList', () => {
+      const { container, getAllByText } = renderMenuContainer();
+      expect(dispatch).toBeCalledTimes(1);
 
-    MENULIST.forEach(({ name }) => (
-      expect(container).toHaveTextContent(`${name}`)
-    ));
+      MENULIST.forEach(({ name }) => (
+        expect(container).toHaveTextContent(`${name}`)
+      ));
+
+      expect(getAllByText('삭제')).toBeTruthy();
+    });
+
+    it('listens delete click event', () => {
+      const { getByTestId } = renderMenuContainer();
+
+      fireEvent.click(getByTestId(MENULIST[0].id));
+
+      expect(dispatch).toBeCalledTimes(3);
+    });
   });
 
   context('with given newMenu', () => {

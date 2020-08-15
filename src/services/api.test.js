@@ -5,6 +5,7 @@ import {
   fetchUser,
   updateVoteId,
   addMenu,
+  deleteMenu,
 } from './api';
 
 import VOTELIST from '../../fixtures/voteList';
@@ -83,6 +84,15 @@ describe('api', () => {
       const id = 'no6';
       const name = '김밥천국';
       const result = await addMenu({ id, name });
+
+      expect(result).toBeUndefined();
+    });
+  });
+
+  describe('deleteMenu', () => {
+    it('delete menu', async () => {
+      const id = 'no5';
+      const result = await deleteMenu(id);
 
       expect(result).toBeUndefined();
     });

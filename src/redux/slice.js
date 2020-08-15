@@ -8,6 +8,7 @@ import {
   fetchUser,
   updateVoteId,
   addMenu,
+  deleteMenu,
 } from '../services/api';
 
 const initialState = {
@@ -147,6 +148,12 @@ export function sendNewMenu(newMenu) {
     await addMenu({ id, name: newMenu });
 
     dispatch(setNewMenu(''));
+  };
+}
+
+export function sendDeleteMenuId(deleteId) {
+  return async () => {
+    await deleteMenu(deleteId);
   };
 }
 
