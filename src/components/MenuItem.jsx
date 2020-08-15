@@ -4,7 +4,7 @@ export default function VoteItem({ menuItem: { id, name }, onClick }) {
   return (
     <>
       <li>
-        {name}
+        <span contentEditable>{name}</span>
         <button
           type="button"
           data-testid={id}
