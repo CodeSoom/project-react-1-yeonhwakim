@@ -51,6 +51,14 @@ describe('MenuContainer', () => {
 
       expect(dispatch).toBeCalledTimes(3);
     });
+
+    it('listens blur events', () => {
+      const { getByText } = renderMenuContainer();
+
+      fireEvent.blur(getByText(MENULIST[0].name), { target: { textContent: '국시나무' } });
+
+      expect(dispatch).toBeCalledTimes(2);
+    });
   });
 
   context('with given newMenu', () => {

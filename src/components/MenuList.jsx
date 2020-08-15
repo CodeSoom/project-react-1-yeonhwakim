@@ -2,7 +2,7 @@ import React from 'react';
 
 import MenuItem from './MenuItem';
 
-export default function MenuList({ menuList, onClick }) {
+export default function MenuList({ menuList, onClick, onBlur }) {
   if (!(menuList || []).length) {
     return (
       <>
@@ -22,6 +22,7 @@ export default function MenuList({ menuList, onClick }) {
               key={menuItem.id}
               menuItem={menuItem}
               onClick={onClick}
+              onBlur={onBlur}
             />
           ))
         }
