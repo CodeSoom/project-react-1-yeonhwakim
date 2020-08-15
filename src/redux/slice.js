@@ -160,7 +160,7 @@ export function sendDeleteMenuId(deleteId) {
 
 export function sendUpdateMenu({ updateId, updateName }) {
   return async () => {
-    await updateMenu({ updateId, updateName });
+    await updateMenu({ id: updateId, name: updateName });
   };
 }
 

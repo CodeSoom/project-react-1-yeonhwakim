@@ -39,8 +39,8 @@ export default function MenuContainer() {
     dispatch(loadMenuList());
   };
 
-  const handleBlur = ({ updateId, updataName }) => {
-    dispatch(sendUpdateMenu({ updateId, updataName }));
+  const handleBlur = ({ updateId, updateName }) => {
+    dispatch(sendUpdateMenu({ updateId, updateName }));
   };
 
   return (
