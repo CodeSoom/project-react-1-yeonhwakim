@@ -9,6 +9,7 @@ import {
   updateVoteId,
   addMenu,
   deleteMenu,
+  updateMenu,
 } from '../services/api';
 
 const initialState = {
@@ -154,6 +155,12 @@ export function sendNewMenu(newMenu) {
 export function sendDeleteMenuId(deleteId) {
   return async () => {
     await deleteMenu(deleteId);
+  };
+}
+
+export function sendUpdateMenu({ updateId, updateName }) {
+  return async () => {
+    await updateMenu({ updateId, updateName });
   };
 }
 
