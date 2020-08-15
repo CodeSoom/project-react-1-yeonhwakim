@@ -54,3 +54,14 @@ export async function deleteMenu(id) {
     method: 'DELETE',
   });
 }
+
+export async function updateMenu({ id, name }) {
+  const url = `http://localhost:3000/voteList/${id}`;
+  await fetch(url, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ name }),
+  });
+}

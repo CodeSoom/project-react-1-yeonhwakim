@@ -6,6 +6,7 @@ import {
   updateVoteId,
   addMenu,
   deleteMenu,
+  updateMenu,
 } from './api';
 
 import VOTELIST from '../../fixtures/voteList';
@@ -93,6 +94,16 @@ describe('api', () => {
     it('delete menu', async () => {
       const id = 'no5';
       const result = await deleteMenu(id);
+
+      expect(result).toBeUndefined();
+    });
+  });
+
+  describe('updateMenu', () => {
+    it('update menu', async () => {
+      const id = 'no1';
+      const name = '국시나무';
+      const result = await updateMenu({ id, name });
 
       expect(result).toBeUndefined();
     });

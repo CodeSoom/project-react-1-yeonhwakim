@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "api": "json-server --watch db.json",
-    "test:unit": "jest",
+    "test:unit": "jest --watchAll",
     "test:e2e": "codeceptjs run --steps",
     "lint": "eslint --ext js,jsx ."
   },
