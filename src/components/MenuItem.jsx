@@ -1,10 +1,10 @@
 import React from 'react';
 
 export default function VoteItem({ menuItem: { id, name }, onClick, onBlur }) {
-  function handleBlur(event, updateId) {
+  function handleBlur(event) {
     const { target: { textContent } } = event;
     onBlur({
-      updateId,
+      updateId: id,
       updateName: textContent,
     });
   }
@@ -15,7 +15,7 @@ export default function VoteItem({ menuItem: { id, name }, onClick, onBlur }) {
         <span
           contentEditable
           suppressContentEditableWarning
-          onBlur={(event) => handleBlur(event, id)}
+          onBlur={handleBlur}
         >
           {name}
 
