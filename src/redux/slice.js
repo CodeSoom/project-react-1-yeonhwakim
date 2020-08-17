@@ -105,7 +105,6 @@ export function loadVoteList() {
 export function loadMenuList() {
   return async (dispatch) => {
     const menuList = await fetchMenuList();
-    console.log(menuList);
     dispatch(setMenuList(menuList));
   };
 }
