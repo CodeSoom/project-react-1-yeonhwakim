@@ -4,7 +4,11 @@ import { render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { MemoryRouter } from 'react-router-dom';
+
 import HomePage from './HomePage';
+
+import HOME from '../../fixtures/home';
 
 describe('HomePage', () => {
   const dispatch = jest.fn();
@@ -15,23 +19,39 @@ describe('HomePage', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
-      roomList: [],
+      roomList: given.roomList,
     }));
   });
 
-  it('render room title', () => {
-    const { container } = render((
-      <HomePage />
-    ));
+  context('with params props', () => {
+    given('roomList', () => (HOME[0].room));
 
-    expect(container).toHaveTextContent('Home!!!!');
+    it('renders rooms', () => {
+      const params = { id: '1' };
+
+      const { container } = render(
+        <HomePage params={params} />,
+      );
+
+      HOME[0].room.map((room) => (
+        expect(container).toHaveTextContent(room.name)
+      ));
+    });
   });
 
-  it('loads room list', () => {
-    render((
-      <HomePage />
-    ));
+  context('without params props', () => {
+    given('roomList', () => (HOME[0].room));
 
-    expect(dispatch).toBeCalled();
+    it('renders name', () => {
+      const { container } = render(
+        <MemoryRouter initialEntries={['/home/1']}>
+          <HomePage />
+        </MemoryRouter>,
+      );
+
+      HOME[0].room.map((room) => (
+        expect(container).toHaveTextContent(room.name)
+      ));
+    });
   });
 });

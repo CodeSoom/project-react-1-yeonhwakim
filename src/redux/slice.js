@@ -102,9 +102,9 @@ export const {
   setNewMenu,
 } = actions;
 
-export function loadRoomList() {
+export function loadRoomList(homeId) {
   return async (dispatch) => {
-    const roomList = await fetchRoomList();
+    const roomList = await fetchRoomList(homeId);
 
     dispatch(setRoomList(roomList));
   };

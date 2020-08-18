@@ -10,11 +10,11 @@ import { get } from '../utils/utils';
 
 import RoomList from '../components/RoomList';
 
-export default function HomeContainer() {
+export default function HomeContainer({ homeId }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadRoomList());
+    dispatch(loadRoomList(homeId));
   }, []);
 
   const roomList = useSelector(get('roomList'));

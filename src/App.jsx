@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 
 import {
   Switch,
+  Route,
 } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
@@ -30,8 +31,8 @@ export default function App() {
   return (
     <>
       <Switch>
-        <HomePage exact path="/home/:id" component={HomePage} />
-        <RoomPage path="/home/:id/room/:name" component={RoomPage} />
+        <Route exact path="/home/:id" component={HomePage} />
+        <Route path="/home/:id/room/:name" component={RoomPage} />
       </Switch>
     </>
   );
