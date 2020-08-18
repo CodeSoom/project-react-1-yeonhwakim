@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import shortid from 'shortid';
 
 import {
+  fetchRoomList,
   fetchVoteList,
   fetchMenuList,
   fetchUsers,
@@ -100,6 +101,14 @@ export const {
   setVoteId,
   setNewMenu,
 } = actions;
+
+export function loadRoomList() {
+  return async (dispatch) => {
+    const roomList = await fetchRoomList();
+
+    dispatch(setRoomList(roomList));
+  };
+}
 
 export function loadVoteList() {
   return async (dispatch) => {
