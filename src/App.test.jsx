@@ -22,6 +22,7 @@ describe('App', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
+      roomList: [],
       voteList: [],
     }));
   });
@@ -34,25 +35,25 @@ describe('App', () => {
     ));
   }
 
-  context('with path /', () => {
+  context('with path /home/1', () => {
     it('default path renders vote page', () => {
-      const { container } = renderApp({ path: '/' });
+      const { container } = renderApp({ path: '/home/1' });
 
-      expect(container).toHaveTextContent('Vote for lunch!!!');
+      expect(container).toHaveTextContent('Home!!!!');
     });
   });
 
-  context('with path /vote', () => {
+  context('with path /home/1/room/우디/vote', () => {
     it('renders the vote page', () => {
-      const { container } = renderApp({ path: '/vote' });
+      const { container } = renderApp({ path: '/home/1/room/우디/vote' });
 
       expect(container).toHaveTextContent('Vote for lunch!!!');
     });
   });
 
-  context('with path /menu', () => {
+  context('with path /home/1/room/우디/menu', () => {
     it('renders the menu page', () => {
-      const { container } = renderApp({ path: '/menu' });
+      const { container } = renderApp({ path: '/home/1/room/우디/menu' });
 
       expect(container).toHaveTextContent('Menu!!!!');
     });
@@ -66,7 +67,7 @@ describe('App', () => {
     });
 
     it('save token', () => {
-      renderApp({ path: '/' });
+      renderApp({ path: '/home/1' });
 
       saveItem.mockImplementation(() => accessToken);
 
@@ -82,7 +83,7 @@ describe('App', () => {
     });
 
     it('loadUser', () => {
-      renderApp({ path: '/' });
+      renderApp({ path: '/home/1' });
 
       expect(dispatch).toBeCalledTimes(2);
     });

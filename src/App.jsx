@@ -2,14 +2,12 @@ import React, { useEffect } from 'react';
 
 import {
   Switch,
-  Route,
 } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 
-import TabPage from './pages/TabPage';
-import VotePage from './pages/VotePage';
-import MenuPage from './pages/MenuPage';
+import HomePage from './pages/HomePage';
+import RoomPage from './pages/RoomPage';
 
 import {
   loadUser,
@@ -31,11 +29,9 @@ export default function App() {
 
   return (
     <>
-      <TabPage />
       <Switch>
-        <Route exact path="/" component={VotePage} />
-        <Route path="/vote" component={VotePage} />
-        <Route path="/menu" component={MenuPage} />
+        <HomePage exact path="/home/:id" component={HomePage} />
+        <RoomPage path="/home/:id/room/:name" component={RoomPage} />
       </Switch>
     </>
   );
