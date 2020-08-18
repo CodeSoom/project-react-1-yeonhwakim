@@ -15,6 +15,7 @@ import USER from '../../fixtures/user';
 describe('reducer', () => {
   context('when previous state is undefined', () => {
     const initialState = {
+      roomList: [],
       voteList: [],
       menuList: [],
       voteId: '',

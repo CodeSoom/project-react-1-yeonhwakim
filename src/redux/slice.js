@@ -13,6 +13,7 @@ import {
 } from '../services/api';
 
 const initialState = {
+  roomList: [],
   voteList: [],
   menuList: [],
   voteId: '',
