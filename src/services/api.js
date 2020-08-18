@@ -1,3 +1,10 @@
+export async function fetchRoomList(homeId) {
+  const url = `http://localhost:3000/home/${homeId}`;
+  const response = await fetch(url);
+  const data = await response.json();
+  return data.room;
+}
+
 export async function fetchVoteList() {
   const url = 'http://localhost:3000/voteList';
   const response = await fetch(url);
