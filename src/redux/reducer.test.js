@@ -1,4 +1,5 @@
 import reducer, {
+  setRoomList,
   setVoteList,
   setMenuList,
   setCounts,
@@ -7,6 +8,7 @@ import reducer, {
   setNewMenu,
 } from './slice';
 
+import HOME from '../../fixtures/home';
 import VOTELIST from '../../fixtures/voteList';
 import MENULIST from '../../fixtures/menuList';
 import USERS from '../../fixtures/users';
@@ -27,6 +29,18 @@ describe('reducer', () => {
       const state = reducer(undefined, { type: 'action' });
 
       expect(state).toEqual(initialState);
+    });
+  });
+
+  describe('setRoomList', () => {
+    it('changes RoomList', () => {
+      const initialState = {
+        voteList: [],
+      };
+
+      const state = reducer(initialState, setRoomList(HOME[0].room));
+
+      expect(state.roomList).toHaveLength(HOME[0].room.length);
     });
   });
 

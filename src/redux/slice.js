@@ -21,6 +21,13 @@ const initialState = {
   newMenu: '',
 };
 const reducers = {
+  setRoomList(state, { payload: roomList }) {
+    return {
+      ...state,
+      roomList,
+    };
+  },
+
   setVoteList(state, { payload: voteList }) {
     return {
       ...state,
@@ -83,6 +90,7 @@ const { actions, reducer } = createSlice({
 });
 
 export const {
+  setRoomList,
   setVoteList,
   setMenuList,
   setCounts,
