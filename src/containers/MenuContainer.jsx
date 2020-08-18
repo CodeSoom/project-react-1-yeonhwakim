@@ -7,6 +7,7 @@ import {
   sendDeleteMenuId,
   setNewMenu,
   sendNewMenu,
+  sendUpdateMenu,
 } from '../redux/slice';
 
 import { get } from '../utils/utils';
@@ -38,6 +39,10 @@ export default function MenuContainer() {
     dispatch(loadMenuList());
   };
 
+  const handleBlur = ({ updateId, updateName }) => {
+    dispatch(sendUpdateMenu({ updateId, updateName }));
+  };
+
   return (
     <>
       <MenuForm
@@ -48,6 +53,7 @@ export default function MenuContainer() {
       <MenuList
         menuList={menuList}
         onClick={handleClickDelete}
+        onBlur={handleBlur}
       />
     </>
   );

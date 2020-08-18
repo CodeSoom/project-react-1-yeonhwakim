@@ -9,6 +9,7 @@ import {
   updateVoteId,
   addMenu,
   deleteMenu,
+  updateMenu,
 } from '../services/api';
 
 const initialState = {
@@ -104,7 +105,6 @@ export function loadVoteList() {
 export function loadMenuList() {
   return async (dispatch) => {
     const menuList = await fetchMenuList();
-
     dispatch(setMenuList(menuList));
   };
 }
@@ -154,6 +154,12 @@ export function sendNewMenu(newMenu) {
 export function sendDeleteMenuId(deleteId) {
   return async () => {
     await deleteMenu(deleteId);
+  };
+}
+
+export function sendUpdateMenu({ updateId, updateName }) {
+  return async () => {
+    await updateMenu({ id: updateId, name: updateName });
   };
 }
 

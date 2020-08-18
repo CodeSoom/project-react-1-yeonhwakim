@@ -16,6 +16,7 @@ import {
   sendNewMenu,
   setNewMenu,
   sendDeleteMenuId,
+  sendUpdateMenu,
 } from './slice';
 
 import APIVOTELIST from '../../fixtures/apiVoteList';
@@ -130,6 +131,23 @@ describe('actions', () => {
 
     it('runs nothing', async () => {
       await store.dispatch(sendDeleteMenuId('no1'));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toBeUndefined();
+    });
+  });
+
+  describe('sendUpdateMenu', () => {
+    beforeEach(() => {
+      store = mockStore({
+      });
+    });
+
+    it('runs nothing', async () => {
+      const updateId = 'no1';
+      const updateName = '국시나무';
+      await store.dispatch(sendUpdateMenu({ updateId, updateName }));
 
       const actions = store.getActions();
 

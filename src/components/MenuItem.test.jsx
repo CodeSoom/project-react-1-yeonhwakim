@@ -8,15 +8,18 @@ import MENULIST from '../../fixtures/menuList';
 
 describe('MenuItem', () => {
   const handleClickDelete = jest.fn();
+  const handleBlur = jest.fn();
 
   beforeEach(() => {
     handleClickDelete.mockClear();
+    handleBlur.mockClear();
   });
 
   function renderMenuItem(menuItem) {
     return render(<MenuItem
       menuItem={menuItem}
       onClick={handleClickDelete}
+      onBlur={handleBlur}
     />);
   }
 
@@ -37,5 +40,19 @@ describe('MenuItem', () => {
     fireEvent.click(getByText('삭제'));
 
     expect(handleClickDelete).toBeCalledWith(menuItem.id);
+  });
+
+  it('listens blur event', () => {
+    const menuItem = MENULIST[0];
+
+    const { getByText } = renderMenuItem(menuItem);
+
+    const span = getByText(menuItem.name);
+    const updateId = 'no1';
+    const updateName = '국시나무';
+
+    fireEvent.blur(span, { target: { textContent: updateName } });
+
+    expect(handleBlur).toBeCalledWith({ updateId, updateName });
   });
 });

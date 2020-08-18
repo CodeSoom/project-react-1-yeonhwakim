@@ -30,3 +30,7 @@ export function addMenu() {
 export function deleteMenu() {
   return null;
 }
+
+export function updateMenu() {
+  return null;
+}

@@ -1,10 +1,25 @@
 import React from 'react';
 
-export default function VoteItem({ menuItem: { id, name }, onClick }) {
+export default function VoteItem({ menuItem: { id, name }, onClick, onBlur }) {
+  function handleBlur(event) {
+    const { target: { textContent } } = event;
+    onBlur({
+      updateId: id,
+      updateName: textContent,
+    });
+  }
+
   return (
     <>
       <li>
-        {name}
+        <span
+          contentEditable
+          suppressContentEditableWarning
+          onBlur={handleBlur}
+        >
+          {name}
+
+        </span>
         <button
           type="button"
           data-testid={id}
