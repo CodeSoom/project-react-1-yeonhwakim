@@ -34,11 +34,22 @@ describe('HomeContainer', () => {
 
     it('renders roomList', () => {
       const { container } = renderHoomContainer();
+
       expect(dispatch).toBeCalledTimes(1);
 
       HOME[0].room.forEach(({ name }) => (
         expect(container).toHaveTextContent(`${name}`)
       ));
+    });
+  });
+
+  context('without roomList', () => {
+    given('roomList', () => ([]));
+
+    it('renders no items message', () => {
+      const { container } = renderHoomContainer();
+
+      expect(container).toHaveTextContent('투표방을 추가해주세요~');
     });
   });
 });

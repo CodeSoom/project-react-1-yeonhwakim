@@ -1,5 +1,7 @@
 import React from 'react';
 
+import RoomItem from './RoomItem';
+
 export default function RoomList({ roomList }) {
   if (!(roomList || []).length) {
     return (
@@ -16,9 +18,10 @@ export default function RoomList({ roomList }) {
       <ul>
         {
           roomList.map((roomItem) => (
-            <li key={roomItem.id}>
-              {roomItem.name}
-            </li>
+            <RoomItem
+              key={roomItem.id}
+              roomItem={roomItem}
+            />
           ))
         }
       </ul>

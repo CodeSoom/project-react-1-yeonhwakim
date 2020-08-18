@@ -8,6 +8,8 @@ import {
 
 import { get } from '../utils/utils';
 
+import RoomList from '../components/RoomList';
+
 export default function HomeContainer() {
   const dispatch = useDispatch();
 
@@ -19,11 +21,9 @@ export default function HomeContainer() {
 
   return (
     <>
-      <ul>
-        {roomList.map(({ name, id }) => (
-          <li key={id}>{name}</li>
-        ))}
-      </ul>
+      <RoomList
+        roomList={roomList}
+      />
     </>
   );
 }
