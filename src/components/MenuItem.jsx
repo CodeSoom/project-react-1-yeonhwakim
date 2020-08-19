@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function VoteItem({ menuItem: { id, name }, onClick, onBlur }) {
+export default function MenuItem({ menuItem: { id, name }, onClick, onBlur }) {
   function handleBlur(event) {
     const { target: { textContent } } = event;
     onBlur({

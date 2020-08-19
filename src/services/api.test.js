@@ -1,4 +1,5 @@
 import {
+  fetchRoomList,
   fetchVoteList,
   fetchMenuList,
   fetchUsers,
@@ -9,6 +10,7 @@ import {
   updateMenu,
 } from './api';
 
+import HOME from '../../fixtures/home';
 import VOTELIST from '../../fixtures/voteList';
 import MENULIST from '../../fixtures/menuList';
 import USERS from '../../fixtures/users';
@@ -20,6 +22,19 @@ describe('api', () => {
       async json() { return data; },
     });
   };
+
+  describe('fetchRoomList', () => {
+    beforeEach(() => {
+      mockFetch(HOME[0]);
+    });
+
+    it('returns roomList', async () => {
+      const homeId = 1;
+      const roomList = await fetchRoomList(homeId);
+
+      expect(roomList).toEqual(HOME[0].room);
+    });
+  });
 
   describe('fetchVoteList', () => {
     beforeEach(() => {

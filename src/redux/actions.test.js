@@ -3,10 +3,12 @@ import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 
 import {
+  loadRoomList,
   loadVoteList,
   loadMenuList,
   loadUsers,
   loadUser,
+  setRoomList,
   sendVoteId,
   setVoteList,
   setMenuList,
@@ -19,6 +21,7 @@ import {
   sendUpdateMenu,
 } from './slice';
 
+import HOME from '../../fixtures/home';
 import APIVOTELIST from '../../fixtures/apiVoteList';
 import MENULIST from '../../fixtures/menuList';
 import USERS from '../../fixtures/users';
@@ -31,6 +34,20 @@ jest.mock('../services/api');
 
 describe('actions', () => {
   let store;
+
+  describe('loadRoomList', () => {
+    beforeEach(() => {
+      store = mockStore([]);
+    });
+
+    it('runs setRoomList', async () => {
+      await store.dispatch(loadRoomList());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setRoomList(HOME[0].room));
+    });
+  });
 
   describe('loadVoteList', () => {
     beforeEach(() => {

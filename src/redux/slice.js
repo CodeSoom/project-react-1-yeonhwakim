@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import shortid from 'shortid';
 
 import {
+  fetchRoomList,
   fetchVoteList,
   fetchMenuList,
   fetchUsers,
@@ -13,6 +14,7 @@ import {
 } from '../services/api';
 
 const initialState = {
+  roomList: [],
   voteList: [],
   menuList: [],
   voteId: '',
@@ -20,6 +22,13 @@ const initialState = {
   newMenu: '',
 };
 const reducers = {
+  setRoomList(state, { payload: roomList }) {
+    return {
+      ...state,
+      roomList,
+    };
+  },
+
   setVoteList(state, { payload: voteList }) {
     return {
       ...state,
@@ -82,6 +91,7 @@ const { actions, reducer } = createSlice({
 });
 
 export const {
+  setRoomList,
   setVoteList,
   setMenuList,
   setCounts,
@@ -91,6 +101,14 @@ export const {
   setVoteId,
   setNewMenu,
 } = actions;
+
+export function loadRoomList(homeId) {
+  return async (dispatch) => {
+    const roomList = await fetchRoomList(homeId);
+
+    dispatch(setRoomList(roomList));
+  };
+}
 
 export function loadVoteList() {
   return async (dispatch) => {
