@@ -13,9 +13,11 @@ jest.mock('react-redux');
 describe('HomeContainer', () => {
   const dispatch = jest.fn();
 
-  function renderHoomContainer() {
+  function renderHoomContainer(id) {
     return render((
-      <HomeContainer />
+      <HomeContainer
+        homeId={id}
+      />
     ));
   }
 
@@ -33,12 +35,15 @@ describe('HomeContainer', () => {
     given('roomList', () => (HOME[0].room));
 
     it('renders roomList', () => {
-      const { container } = renderHoomContainer();
+      const homeId = 1;
+      const { container } = renderHoomContainer(homeId);
 
       expect(dispatch).toBeCalledTimes(1);
 
-      HOME[0].room.forEach(({ name }) => (
-        expect(container).toHaveTextContent(`${name}`)
+      HOME.filter((homeItem) => (
+        homeItem.id === homeId
+      ))[0].room.map((room) => (
+        expect(container).toHaveTextContent(room.name)
       ));
     });
   });
@@ -47,7 +52,8 @@ describe('HomeContainer', () => {
     given('roomList', () => ([]));
 
     it('renders no items message', () => {
-      const { container } = renderHoomContainer();
+      const homeId = 1;
+      const { container } = renderHoomContainer(homeId);
 
       expect(container).toHaveTextContent('투표방을 추가해주세요~');
     });
