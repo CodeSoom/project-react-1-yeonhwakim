@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -8,7 +8,16 @@ import HomeContainer from './HomeContainer';
 
 import HOME from '../../fixtures/home';
 
+const mockHistoryPush = jest.fn();
+
 jest.mock('react-redux');
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useHistory: () => ({
+    push: mockHistoryPush,
+  }),
+}));
 
 describe('HomeContainer', () => {
   const dispatch = jest.fn();
@@ -45,6 +54,16 @@ describe('HomeContainer', () => {
       ))[0].room.map((room) => (
         expect(container).toHaveTextContent(room.name)
       ));
+    });
+
+    it('listens click event', () => {
+      const homeId = 1;
+      const { getByText } = renderHoomContainer(homeId);
+      const { id, name } = HOME[0].room[0];
+
+      fireEvent.click(getByText(name));
+
+      expect(mockHistoryPush).toHaveBeenCalledWith(`/home/${homeId}/room/${id}/vote`);
     });
   });
 
