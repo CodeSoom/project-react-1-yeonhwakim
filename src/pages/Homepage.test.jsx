@@ -27,13 +27,15 @@ describe('HomePage', () => {
     given('roomList', () => (HOME[0].room));
 
     it('renders rooms', () => {
-      const params = { id: '1' };
+      const params = { id: 1 };
 
       const { container } = render(
         <HomePage params={params} />,
       );
 
-      HOME[0].room.map((room) => (
+      HOME.filter((homeItem) => (
+        homeItem.id === params.id
+      ))[0].room.map((room) => (
         expect(container).toHaveTextContent(room.name)
       ));
     });
@@ -43,13 +45,16 @@ describe('HomePage', () => {
     given('roomList', () => (HOME[0].room));
 
     it('renders name', () => {
+      const id = 1;
       const { container } = render(
-        <MemoryRouter initialEntries={['/home/1']}>
+        <MemoryRouter initialEntries={[`/home/${id}`]}>
           <HomePage />
         </MemoryRouter>,
       );
 
-      HOME[0].room.map((room) => (
+      HOME.filter((homeItem) => (
+        homeItem.id === id
+      ))[0].room.map((room) => (
         expect(container).toHaveTextContent(room.name)
       ));
     });
