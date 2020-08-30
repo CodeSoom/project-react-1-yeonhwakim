@@ -59,4 +59,18 @@ describe('HomePage', () => {
       ));
     });
   });
+
+  context('with path /home/1/room/1', () => {
+    it('renders the vote page', () => {
+      const homeId = 1;
+      const roomId = 1;
+      const { container } = render(
+        <MemoryRouter initialEntries={[`/home/${homeId}/room/${roomId}/vote`]}>
+          <HomePage />
+        </MemoryRouter>,
+      );
+
+      expect(container).toHaveTextContent('Vote for lunch!!!');
+    });
+  });
 });
