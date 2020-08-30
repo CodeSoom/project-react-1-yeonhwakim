@@ -1,36 +1,31 @@
 import React from 'react';
 
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
+
+import { MemoryRouter } from 'react-router-dom';
 
 import RoomItem from './RoomItem';
 
 import HOME from '../../fixtures/home';
 
 describe('RoomItem', () => {
-  const handleClick = jest.fn();
-
-  function renderRoomItem(roomItem) {
-    return render(<RoomItem
-      roomItem={roomItem}
-      onClick={handleClick}
-    />);
+  function renderRoomItem({ homeId, roomItem }) {
+    return render(
+      <MemoryRouter>
+        <RoomItem
+          homeId={homeId}
+          roomItem={roomItem}
+        />
+      </MemoryRouter>,
+    );
   }
 
   it('renders room item', () => {
+    const homeId = HOME[0].id;
     const roomItem = HOME[0].room[0];
 
-    const { container } = renderRoomItem(roomItem);
+    const { container } = renderRoomItem({ homeId, roomItem });
 
     expect(container).toHaveTextContent('우디');
-  });
-
-  it('listens click event', () => {
-    const roomItem = HOME[0].room[0];
-
-    const { getByText } = renderRoomItem(roomItem);
-
-    fireEvent.click(getByText(HOME[0].room[0].name));
-
-    expect(handleClick).toBeCalledWith(HOME[0].room[0].id);
   });
 });
