@@ -14,8 +14,8 @@ export default function RoomPage() {
     <>
       <TabPage />
       <Switch>
-        <Route path="/home/:id/room/:name/vote" component={VotePage} />
-        <Route path="/home/:id/room/:name/menu" component={MenuPage} />
+        <Route path="/home/:id/room/:roomId/vote" component={VotePage} />
+        <Route path="/home/:id/room/:roomId/menu" component={MenuPage} />
       </Switch>
     </>
   );

@@ -31,8 +31,8 @@ export default function App() {
   return (
     <>
       <Switch>
-        <Route exact path="/home/:id" component={HomePage} />
-        <Route path="/home/:id/room/:name" component={RoomPage} />
+        <Route exact path="/home/:homeId" component={HomePage} />
+        <Route path="/home/:homeId/room/:roomId" component={RoomPage} />
       </Switch>
     </>
   );

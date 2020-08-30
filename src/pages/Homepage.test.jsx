@@ -30,7 +30,9 @@ describe('HomePage', () => {
       const params = { id: 1 };
 
       const { container } = render(
-        <HomePage params={params} />,
+        <MemoryRouter>
+          <HomePage params={params} />
+        </MemoryRouter>,
       );
 
       HOME.filter((homeItem) => (

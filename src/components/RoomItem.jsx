@@ -1,11 +1,11 @@
 import React from 'react';
 
-export default function RoomItem({ roomItem: { name } }) {
+import { Link } from 'react-router-dom';
+
+export default function RoomItem({ homeId, roomItem: { id: roomId, name } }) {
   return (
     <>
-      <button type="button">
-        {name}
-      </button>
+      <Link to={`/home/${homeId}/room/${roomId}/vote`}>{name}</Link>
     </>
   );
 }

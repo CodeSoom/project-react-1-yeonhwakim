@@ -22,6 +22,7 @@ export default function HomeContainer({ homeId }) {
   return (
     <>
       <RoomList
+        homeId={homeId}
         roomList={roomList}
       />
     </>
