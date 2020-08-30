@@ -2,7 +2,7 @@ import React from 'react';
 
 import RoomItem from './RoomItem';
 
-export default function RoomList({ roomList, onClick }) {
+export default function RoomList({ homeId, roomList }) {
   if (!(roomList || []).length) {
     return (
       <>
@@ -19,9 +19,9 @@ export default function RoomList({ roomList, onClick }) {
         {
           roomList.map((roomItem) => (
             <RoomItem
+              homeId={homeId}
               key={roomItem.id}
               roomItem={roomItem}
-              onClick={onClick}
             />
           ))
         }
