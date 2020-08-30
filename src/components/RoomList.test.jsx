@@ -2,6 +2,8 @@ import React from 'react';
 
 import { render } from '@testing-library/react';
 
+import { MemoryRouter } from 'react-router-dom';
+
 import RoomList from './RoomList';
 
 import Home from '../../fixtures/home';
@@ -9,10 +11,12 @@ import Home from '../../fixtures/home';
 describe('RoomList', () => {
   function renderRoomList({ homeId, roomList }) {
     return render((
-      <RoomList
-        homeId={homeId}
-        roomList={roomList}
-      />
+      <MemoryRouter>
+        <RoomList
+          homeId={homeId}
+          roomList={roomList}
+        />
+      </MemoryRouter>
     ));
   }
 
