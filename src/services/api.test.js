@@ -12,7 +12,6 @@ import {
 
 import HOME from '../../fixtures/home';
 import ROOM from '../../fixtures/room';
-import VOTELIST from '../../fixtures/voteList';
 import USERS from '../../fixtures/users';
 import USER from '../../fixtures/user';
 
@@ -38,13 +37,14 @@ describe('api', () => {
 
   describe('fetchVoteList', () => {
     beforeEach(() => {
-      mockFetch(VOTELIST);
+      mockFetch(ROOM[0]);
     });
 
     it('returns voteList', async () => {
-      const voteList = await fetchVoteList();
+      const roomId = ROOM.id;
+      const voteList = await fetchVoteList({ roomId });
 
-      expect(voteList).toEqual(VOTELIST);
+      expect(voteList).toEqual(ROOM[0]);
     });
   });
 
