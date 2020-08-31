@@ -10,6 +10,7 @@ import VotePage from './VotePage';
 
 import HOME from '../../fixtures/home';
 import ROOM from '../../fixtures/room';
+import VOTELIST from '../../fixtures/voteList';
 
 describe('VotePage', () => {
   const dispatch = jest.fn();
@@ -20,12 +21,12 @@ describe('VotePage', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
-      voteList: [],
+      voteList: given.voteList,
     }));
   });
 
   context('with params props', () => {
-    given('voteList', () => (ROOM[0].menu));
+    given('voteList', () => (VOTELIST));
 
     it('renders voteList', () => {
       const params = { roomId: ROOM[0].id };
@@ -45,7 +46,7 @@ describe('VotePage', () => {
   });
 
   context('without params props', () => {
-    given('voteList', () => (ROOM[0].menu));
+    given('voteList', () => (VOTELIST));
 
     it('renders name', () => {
       const homeId = HOME[0].room[0].id;
