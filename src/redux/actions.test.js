@@ -70,11 +70,13 @@ describe('actions', () => {
     });
 
     it('runs setMenuList', async () => {
-      await store.dispatch(loadMenuList());
+      const homeId = HOME[0].id;
+      const roomId = HOME[0].room[0].id;
+      await store.dispatch(loadMenuList({ homeId, roomId }));
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setMenuList(MENULIST));
+      expect(actions[0]).toEqual(setMenuList(HOME[0].room[0].menu));
     });
   });
 
