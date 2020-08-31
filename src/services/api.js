@@ -9,7 +9,7 @@ export async function fetchVoteList({ roomId }) {
   const url = `http://localhost:3000/room/${roomId}`;
   const response = await fetch(url);
   const data = await response.json();
-  return data;
+  return data.menu;
 }
 
 export async function fetchMenuList({ roomId }) {

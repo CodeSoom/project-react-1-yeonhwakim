@@ -44,7 +44,7 @@ describe('api', () => {
       const roomId = ROOM.id;
       const voteList = await fetchVoteList({ roomId });
 
-      expect(voteList).toEqual(ROOM[0]);
+      expect(voteList).toEqual(ROOM[0].menu);
     });
   });
 
