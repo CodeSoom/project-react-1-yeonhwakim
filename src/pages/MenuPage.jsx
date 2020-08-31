@@ -6,6 +6,7 @@ import MenuContainer from '../containers/MenuContainer';
 
 export default function MenuPage({ params }) {
   const { roomId } = params || useParams();
+
   return (
     <>
       <h1>Menu!!!!</h1>
