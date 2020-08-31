@@ -12,11 +12,11 @@ export async function fetchVoteList() {
   return data;
 }
 
-export async function fetchMenuList() {
-  const url = 'http://localhost:3000/voteList';
+export async function fetchMenuList({ homeId, roomId }) {
+  const url = `http://localhost:3000/home/${homeId}/room/${roomId}`;
   const response = await fetch(url);
   const data = await response.json();
-  return data;
+  return data.menu;
 }
 
 export async function fetchUsers() {
