@@ -56,7 +56,8 @@ describe('actions', () => {
     });
 
     it('runs setVoteList', async () => {
-      await store.dispatch(loadVoteList());
+      const roomId = ROOM[0].id;
+      await store.dispatch(loadVoteList({ roomId }));
 
       const actions = store.getActions();
 

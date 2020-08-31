@@ -110,9 +110,9 @@ export function loadRoomList(homeId) {
   };
 }
 
-export function loadVoteList() {
+export function loadVoteList({ roomId }) {
   return async (dispatch) => {
-    const voteList = await fetchVoteList();
+    const voteList = await fetchVoteList({ roomId });
     const users = await fetchUsers();
 
     dispatch(setVoteList(voteList));
