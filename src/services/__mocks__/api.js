@@ -1,4 +1,5 @@
 import HOME from '../../../fixtures/home';
+import ROOM from '../../../fixtures/room';
 import APIVOTELIST from '../../../fixtures/apiVoteList';
 import USERS from '../../../fixtures/users';
 import USER from '../../../fixtures/user';
@@ -12,7 +13,7 @@ export async function fetchVoteList() {
 }
 
 export async function fetchMenuList() {
-  return HOME[0].room[0].menu;
+  return ROOM[0].menu;
 }
 
 export function fetchUsers() {
