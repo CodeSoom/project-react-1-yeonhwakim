@@ -15,11 +15,11 @@ import { get } from '../utils/utils';
 import MenuForm from '../components/MenuForm';
 import MenuList from '../components/MenuList';
 
-export default function MenuContainer() {
+export default function MenuContainer({ homeId, roomId }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadMenuList());
+    dispatch(loadMenuList({ homeId, roomId }));
   }, []);
 
   const newMenu = useSelector(get('newMenu'));
@@ -31,12 +31,12 @@ export default function MenuContainer() {
 
   const handleSubmit = () => {
     dispatch(sendNewMenu(newMenu));
-    dispatch(loadMenuList());
+    dispatch(loadMenuList({ homeId, roomId }));
   };
 
   const handleClickDelete = (deleteId) => {
     dispatch(sendDeleteMenuId(deleteId));
-    dispatch(loadMenuList());
+    dispatch(loadMenuList({ homeId, roomId }));
   };
 
   const handleBlur = ({ updateId, updateName }) => {
