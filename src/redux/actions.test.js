@@ -22,6 +22,7 @@ import {
 } from './slice';
 
 import HOME from '../../fixtures/home';
+import ROOM from '../../fixtures/room';
 import APIVOTELIST from '../../fixtures/apiVoteList';
 import MENULIST from '../../fixtures/menuList';
 import USERS from '../../fixtures/users';
@@ -70,13 +71,12 @@ describe('actions', () => {
     });
 
     it('runs setMenuList', async () => {
-      const homeId = HOME[0].id;
-      const roomId = HOME[0].room[0].id;
-      await store.dispatch(loadMenuList({ homeId, roomId }));
+      const roomId = ROOM[0].id;
+      await store.dispatch(loadMenuList({ roomId }));
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setMenuList(HOME[0].room[0].menu));
+      expect(actions[0]).toEqual(setMenuList(ROOM[0].menu));
     });
   });
 

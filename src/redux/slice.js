@@ -120,9 +120,9 @@ export function loadVoteList() {
   };
 }
 
-export function loadMenuList({ homeId, roomId }) {
+export function loadMenuList({ roomId }) {
   return async (dispatch) => {
-    const menuList = await fetchMenuList({ homeId, roomId });
+    const menuList = await fetchMenuList({ roomId });
     dispatch(setMenuList(menuList));
   };
 }
