@@ -31,17 +31,17 @@ describe('RoomPage', () => {
     ));
   }
 
-  context('with path /home/1/room/우디/vote', () => {
+  context('with path /home/1/room/1/vote', () => {
     it('renders the vote page', () => {
-      const { container } = renderRoomPage({ path: '/home/1/room/우디/vote' });
+      const { container } = renderRoomPage({ path: '/home/1/room/1/vote' });
 
       expect(container).toHaveTextContent('Vote for lunch!!!');
     });
   });
 
-  context('with path /home/1/room/우디/menu', () => {
+  context('with path /home/1/room/1/menu', () => {
     it('renders the menu page', () => {
-      const { container } = renderRoomPage({ path: '/home/1/room/우디/menu' });
+      const { container } = renderRoomPage({ path: '/home/1/room/1/menu' });
 
       expect(container).toHaveTextContent('Menu!!!!');
     });

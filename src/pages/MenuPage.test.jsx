@@ -4,7 +4,12 @@ import { render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { MemoryRouter } from 'react-router-dom';
+
 import MenuPage from './MenuPage';
+
+import HOME from '../../fixtures/home';
+import ROOM from '../../fixtures/room';
 
 describe('MenuPage', () => {
   const dispatch = jest.fn();
@@ -15,22 +20,47 @@ describe('MenuPage', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
-      menuList: [],
+      menuList: given.menuList,
     }));
   });
 
-  it('render menu title', () => {
-    const { container } = render((
-      <MenuPage />
-    ));
+  context('with params props', () => {
+    given('menuList', () => (ROOM[0].menu));
 
-    expect(container).toHaveTextContent('Menu!!!!');
+    it('renders menuList', () => {
+      const params = { roomId: ROOM[0].id };
+
+      const { container } = render(
+        <MemoryRouter>
+          <MenuPage params={params} />
+        </MemoryRouter>,
+      );
+
+      ROOM.filter((roomItem) => (
+        roomItem.id === params.roomId
+      ))[0].menu.map((menuItem) => (
+        expect(container).toHaveTextContent(menuItem.name)
+      ));
+    });
   });
 
-  it('loads vote list', () => {
-    render((
-      <MenuPage />
-    ));
-    expect(dispatch).toBeCalled();
+  context('without params props', () => {
+    given('menuList', () => (ROOM[0].menu));
+
+    it('renders name', () => {
+      const homeId = HOME[0].room[0].id;
+      const roomId = ROOM[0].id;
+      const { container } = render(
+        <MemoryRouter initialEntries={[`/home/${homeId}/room/${roomId}/menu`]}>
+          <MenuPage />
+        </MemoryRouter>,
+      );
+
+      ROOM.filter((roomItem) => (
+        roomItem.id === roomId
+      ))[0].menu.map((menuItem) => (
+        expect(container).toHaveTextContent(menuItem.name)
+      ));
+    });
   });
 });

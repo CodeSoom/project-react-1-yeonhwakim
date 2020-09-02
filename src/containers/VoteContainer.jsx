@@ -11,11 +11,11 @@ import { get } from '../utils/utils';
 
 import VoteList from '../components/VoteList';
 
-export default function VoteContainer() {
+export default function VoteContainer({ roomId }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadVoteList());
+    dispatch(loadVoteList({ roomId }));
   }, []);
 
   const voteList = useSelector(get('voteList'));
@@ -23,7 +23,7 @@ export default function VoteContainer() {
 
   function handleClick(id) {
     dispatch(sendVoteId(id));
-    dispatch(loadVoteList());
+    dispatch(loadVoteList({ roomId }));
   }
 
   return (
